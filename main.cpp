@@ -1,0 +1,68 @@
+//
+//  main.cpp
+//  ST-Dispatch
+//
+//  Created by Marcel Haupt on 08.03.16.
+//  Copyright © 2016 Marcel Haupt. All rights reserved.
+//
+
+#include <iostream>
+#include <GLFW/glfw3.h>
+
+
+int initGL();
+GLFWwindow* window;
+
+
+
+int main () {
+    
+    if (initGL()) return -1;
+    std::cout << "Window initialized, starting program" << std::endl;
+    
+    //main loop
+    do {
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f); //clear background screen to black
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        
+        
+        // Swap buffers
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+        
+    } // Check if the ESC key was pressed or the window was closed
+    while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+           glfwWindowShouldClose(window) == 0);
+    
+    
+    
+    return 0;
+}
+
+
+
+int initGL() {
+    // Initialise GLFW
+    
+    if (!glfwInit())
+        
+    {
+        std::cerr << "Failed to initialize GLFW\n";
+        return 1;
+    }
+    //glEnable(GL_DEPTH_TEST);
+    
+    window = glfwCreateWindow(300, 150, "ST-Dispatch", NULL, NULL);
+    if (window == NULL) {
+        std::cerr << "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible.\n";
+        glfwTerminate();
+        return 2;
+    }
+    glfwMakeContextCurrent(window);
+    
+    // Ensure we can capture the escape key being pressed below
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    
+    return 0;
+}
