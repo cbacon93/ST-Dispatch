@@ -108,5 +108,6 @@ void Networking::sendData(void* data, unsigned int size)
 
 long Networking::receiveData(void* data, unsigned int size)
 {
-    return recvfrom(netSocket, data, size, 0, NULL, NULL);
+    socklen_t addLength = sizeof (clientAddr);
+    return recvfrom(netSocket, data, size, 0, (struct sockaddr *) &clientAddr, &addLength);
 }
