@@ -10,4 +10,4 @@ Requirements:
 - GLFW Libraries: http://www.glfw.org
 
 
-![alt text](http://s11.postimg.org/ipcrpygzl/Bildschirmfoto_2016_03_08_um_16_57_31.png "Struktogramm")
+![Image of Struktogram](http://s11.postimg.org/r7m7uanib/Bildschirmfoto_2016_03_08_um_16_57_31.png)
