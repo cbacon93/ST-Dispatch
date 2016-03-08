@@ -11,6 +11,8 @@
 
 
 int initGL();
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+bool sim_active = true;
 GLFWwindow* window;
 
 
@@ -22,7 +24,10 @@ int main () {
     
     //main loop
     do {
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f); //clear background screen to black
+        if (sim_active)
+            glClearColor(0.0f, 1.0f, 0.0f, 0.0f); //clear background screen to green
+        else
+            glClearColor(1.0f, 0.0f, 0.0f, 0.0f); //clear background screen to red
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         
@@ -63,6 +68,14 @@ int initGL() {
     
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     
     return 0;
+}
+
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+        sim_active = !sim_active;
 }
