@@ -7,7 +7,8 @@ ST Dispatcher
 
 
 Requirements:
-- GLFW Libraries: http://www.glfw.org
+- GLFW Library and Header files: http://www.glfw.org
+- OpenGL Library
 
 
 ![Image of Struktogram](http://s27.postimg.org/ffnxalafn/Struktogramm_001.jpg)
