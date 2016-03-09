@@ -53,7 +53,7 @@ int main () {
     {
         //timer start
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-        std::chrono::high_resolution_clock::time_point wt1 = std::chrono::high_resolution_clock::now();
+        //std::chrono::high_resolution_clock::time_point wt1 = std::chrono::high_resolution_clock::now();
         
         //drawing GUI
         draw();
@@ -71,8 +71,8 @@ int main () {
             usleep(floor(waittime*0.9*1000*1000));
         
         //timer stop 2
-        std::chrono::high_resolution_clock::time_point wt2 = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> wduration = std::chrono::duration_cast<std::chrono::duration<double>>(wt2 - wt1);
+        //std::chrono::high_resolution_clock::time_point wt2 = std::chrono::high_resolution_clock::now();
+        //std::chrono::duration<double> wduration = std::chrono::duration_cast<std::chrono::duration<double>>(wt2 - wt1);
         //std::cout << wduration.count() << std::endl;
         
     } // Check if the ESC key was pressed or the window was closed
