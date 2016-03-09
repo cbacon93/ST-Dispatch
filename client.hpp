@@ -26,7 +26,7 @@
  */
 
 class Client {
-private:
+protected:
     Networking net;
     std::thread th;
     Database *db;

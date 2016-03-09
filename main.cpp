@@ -13,7 +13,7 @@
 #include <GLFW/glfw3.h>
 #include "networking.hpp"
 #include "database.hpp"
-#include "client.hpp"
+#include "client_example.hpp"
 #include "timer_controller.hpp"
 
 
@@ -48,7 +48,7 @@ int main () {
     db.initData();
     
     //init clients
-    Client testClient(&db, "127.0.0.1", 1111, 1112);
+    ClientExample testClient(&db, "127.0.0.1", 1111, 1111);
     
     //main loop
     do

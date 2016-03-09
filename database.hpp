@@ -58,7 +58,7 @@ public:
     
     DBElement<bool> sim_running;
     DBElement<bool> sim_resetted;
-    DBElement<double> bank_angle;
+    DBElement<unsigned int> exampleCounter;
 };
 
 
