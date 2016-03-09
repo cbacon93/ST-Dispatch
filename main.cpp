@@ -8,6 +8,8 @@
 
 
 #include <iostream>
+#include <chrono>
+#include <cmath>
 #include <GLFW/glfw3.h>
 #include "networking.hpp"
 
@@ -22,6 +24,7 @@ GLFWwindow* window;
 
 const int WIDTH = 300;
 const int HEIGHT = 150;
+const double FREQUENCY = 50;
 
 
 int main () {
@@ -29,14 +32,31 @@ int main () {
     if (initGL()) return -1;
     std::cout << "Window initialized, starting program" << std::endl;
     
-    
     //main loop
     do
     {
+        std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+        std::chrono::high_resolution_clock::time_point wt1 = std::chrono::high_resolution_clock::now();
         
-        
+        //drawing GUI
         draw();
         
+        
+        //todo: sending messages
+        
+        
+        //timer
+        std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+        
+        //sleeping
+        double waittime = 1 / FREQUENCY - duration.count();
+        if (waittime > 0)
+            usleep(floor(waittime*0.9*1000*1000));
+        
+        std::chrono::high_resolution_clock::time_point wt2 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> wduration = std::chrono::duration_cast<std::chrono::duration<double>>(wt2 - wt1);
+        std::cout << wduration.count() << std::endl;
         
     } // Check if the ESC key was pressed or the window was closed
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
