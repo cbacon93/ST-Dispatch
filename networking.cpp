@@ -21,21 +21,35 @@ Networking::~Networking()
 }
 
 #ifdef __APPLE__
-bool Networking::initSocket(std::string ip_adress, unsigned int port)
+bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsigned int recvport)
 {
     //empty data
-    bzero(&clientAddr, sizeof(clientAddr));
+    bzero(&recvAddr, sizeof(recvAddr));
+    bzero(&sendAddr, sizeof(sendAddr));
     
     //input client data
-    clientAddr.sin_family = AF_INET;
-    clientAddr.sin_port = port;
-    clientAddr.sin_addr.s_addr = inet_addr(ip_adress.c_str());
+    recvAddr.sin_family = AF_INET;
+    recvAddr.sin_port = htons(recvport);
+    recvAddr.sin_addr.s_addr = inet_addr(ip_adress.c_str());
+    inet_pton(AF_INET, ip_adress.c_str(), &recvAddr.sin_addr);
     
-    //create udp socket
-    netSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    sendAddr.sin_family = AF_INET;
+    sendAddr.sin_port = htons(sendport);
+    sendAddr.sin_addr.s_addr = inet_addr(ip_adress.c_str());
+    inet_pton(AF_INET, ip_adress.c_str(), &sendAddr.sin_addr);
     
-    if (netSocket < 0) {
-        std::cerr << "ERROR: Could not open Socket " << ip_adress << ":" << port << std::endl;
+    //create udp sockets
+    recvSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    sendSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    
+    
+    if (bind(recvSocket, (struct sockaddr*)& recvAddr, sizeof(recvAddr)) < 0) {
+        std::cerr << "ERROR: Could not bind Socket " << ip_adress << ":" << recvport << std::endl;
+        return false;
+    }
+    
+    if (recvSocket < 0 || sendSocket < 0) {
+        std::cerr << "ERROR: Could not open Socket " << ip_adress << ":" << recvport << std::endl;
         return false;
     }
     
@@ -47,12 +61,14 @@ bool Networking::initSocket(std::string ip_adress, unsigned int port)
 #ifdef __APPLE__
 void Networking::closeSocket()
 {
+    close(recvSocket);
+    close(sendSocket);
 }
 #endif
 
 
 #ifdef _WIN32
-bool Networking::initSocket(std::string ip_adress, unsigned int port)
+bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsigned int recvport)
 {
     int wsaError = WSAStartup( MAKEWORD(2,2), &wsaDat );
     
@@ -61,25 +77,34 @@ bool Networking::initSocket(std::string ip_adress, unsigned int port)
         std::cerr << "ERROR: wsa Startup error!" << std::endl;
         return false;
     }
-    
-    netSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-        
-    if (netSocket == INVALID_SOCKET)
-    {
-        std::cerr << "ERROR: socket function failed with error: " << WSAGetLastError() << std::endl;;
-        return false;
-    }
         
     //reset client adress struct
-    ZeroMemory(&clientAddr, sizeof(clientAddr));
+    ZeroMemory(&recvAddr, sizeof(recvAddr));
+    ZeroMemory(&sendAddr, sizeof(sendAddr));
     
     //settings
-    clientAddr.sin_family = AF_INET;
-    clientAddr.sin_port = htons(port);
-    clientAddr.sin_addr.s_addr = inet_addr(ip_adress);
+    recvAddr.sin_family = AF_INET;
+    recvAddr.sin_port = htons(recvport);
+    recvAddr.sin_addr.s_addr = inet_addr(ip_adress);
+    
+    sendAddr.sin_family = AF_INET;
+    sendAddr.sin_port = htons(sendport);
+    sendAddr.sin_addr.s_addr = inet_addr(ip_adress);
     
     //create socket
-    netSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    recvSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    sendSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    
+    if (bind(recvSocket,(SOCKADDR*)&recvAddr,sizeof(SOCKADDR_IN)) < 0) {
+        std::cerr << "ERROR: Could not bind Socket " << ip_adress << ":" << recvport << std::endl;
+        return false;
+    }
+    
+    if (recvSocket < 0 || sendSocket < 0) {
+        std::cerr << "ERROR: Could not open Socket " << ip_adress << ":" << recvport << std::endl;
+        return false;
+    }
+    
     
     return true;
 }
@@ -90,15 +115,16 @@ bool Networking::initSocket(std::string ip_adress, unsigned int port)
 #ifdef _WIN32
 void Networking::closeSocket()
 {
-    closesocket(netSocket);
+    closesocket(recvSocket);
+    closesocket(sendSocket);
     WSACleanup();
 }
 #endif
 
 
-void Networking::sendData(void* data, unsigned int size)
+void Networking::sendData(void* data, unsigned long size)
 {
-    ssize_t n= sendto(netSocket, data, size, 0, (struct sockaddr *) &clientAddr, sizeof (clientAddr));
+    ssize_t n= sendto(sendSocket, data, size, 0, (struct sockaddr *) &sendAddr, sizeof (sendAddr));
     
     if (n < 0) {
         std::cerr << "ERROR: sending bytes" << std::endl;
@@ -106,8 +132,8 @@ void Networking::sendData(void* data, unsigned int size)
 }
 
 
-long Networking::receiveData(void* data, unsigned int size)
+long Networking::receiveData(void* data, unsigned long size)
 {
-    socklen_t addLength = sizeof (clientAddr);
-    return recvfrom(netSocket, data, size, 0, (struct sockaddr *) &clientAddr, &addLength);
+    socklen_t addLength = sizeof (recvAddr);
+    return recvfrom(recvSocket, data, size, 0, (struct sockaddr *) &recvAddr, &addLength);
 }

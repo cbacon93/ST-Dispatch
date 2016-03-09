@@ -41,23 +41,25 @@ class Networking
 {
 private:
 #ifdef _WIN32
-    SOCKET netSocket;
+    SOCKET recvSocket;
+    SOCKET sendSocket;
     WSADATA wsaData;
 #endif
     
 #ifdef __APPLE__
-    int netSocket;
+    int recvSocket;
+    int sendSocket;
 #endif
     
-    sockaddr_in clientAddr;
+    sockaddr_in sendAddr, recvAddr;
     
 public:
     Networking();
     ~Networking();
     
-    bool initSocket(std::string ip_adress, unsigned int port);
-    void sendData(void* data, unsigned int size);
-    long receiveData(void* data, unsigned int size);
+    bool initSocket(std::string ip_adress, unsigned int sendport, unsigned int recvport);
+    void sendData(void* data, unsigned long size);
+    long receiveData(void* data, unsigned long size);
     void closeSocket();
 };
 

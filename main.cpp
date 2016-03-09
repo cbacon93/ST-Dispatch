@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <GLFW/glfw3.h>
+#include "networking.hpp"
 
 
 int initGL();
@@ -22,6 +23,11 @@ int main () {
     if (initGL()) return -1;
     std::cout << "Window initialized, starting program" << std::endl;
     
+    /*Networking net = Networking();
+    net.initSocket("127.0.0.1", 1111, 1111);
+    char sendstr[] = "Hallo Welt!";
+    char data[32];*/
+    
     //main loop
     do {
         if (sim_active)
@@ -31,6 +37,12 @@ int main () {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         
+        /*net.sendData(sendstr, strlen(sendstr));
+        std::cout << "Sent string: " << sendstr << std::endl;
+        size_t n = net.receiveData(data, 32);
+        data[31] = 0;
+        std::cout << "Received " << n << " bytes: " << data << std::endl;
+        sleep(1);*/
         
         // Swap buffers
         glfwSwapBuffers(window);
@@ -40,7 +52,7 @@ int main () {
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
            glfwWindowShouldClose(window) == 0);
     
-    
+    //net.closeSocket();
     
     return 0;
 }
