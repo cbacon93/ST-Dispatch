@@ -7,3 +7,9 @@
 //
 
 #include "database.hpp"
+
+
+void Database::initData() {
+    sim_resetted.set(false);
+    sim_running.set(false);
+}
