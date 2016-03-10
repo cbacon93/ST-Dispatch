@@ -35,6 +35,7 @@ int initGL();
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void draw();
 void sim_start_timeout(int run);
+void mySleep(int ms);
 
 
 //global variables
@@ -76,7 +77,7 @@ int main () {
         //sleeping
         double waittime = 1 / FREQUENCY - duration.count();
         if (waittime > 0)
-            usleep(floor(waittime*0.9*1000*1000));
+            mySleep(floor(waittime*0.9*1000));
         
         //timer stop 2
         std::chrono::high_resolution_clock::time_point wt2 = std::chrono::high_resolution_clock::now();
@@ -210,4 +211,14 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 void sim_start_timeout(int run) {
     db.sim_running.set((bool)run);
     db.sim_resetted.set(false);
+}
+
+
+void mySleep(int ms) {
+#ifdef __APPLE__
+    usleep(ms * 1000);
+#endif
+#ifdef _WIN32
+    Sleep(ms);
+#endif
 }
