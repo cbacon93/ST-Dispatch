@@ -30,8 +30,8 @@ bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsign
     //input client data
     recvAddr.sin_family = AF_INET;
     recvAddr.sin_port = htons(recvport);
-    recvAddr.sin_addr.s_addr = inet_addr(ip_adress.c_str());
-    inet_pton(AF_INET, ip_adress.c_str(), &recvAddr.sin_addr);
+    recvAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
+    inet_pton(AF_INET, "0.0.0.0", &recvAddr.sin_addr);
     
     sendAddr.sin_family = AF_INET;
     sendAddr.sin_port = htons(sendport);
@@ -70,7 +70,7 @@ void Networking::closeSocket()
 #ifdef _WIN32
 bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsigned int recvport)
 {
-    int wsaError = WSAStartup( MAKEWORD(2,2), &wsaDat );
+    int wsaError = WSAStartup( MAKEWORD(2,2), &wsaData );
     
     if(wsaError)
     {
@@ -85,11 +85,11 @@ bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsign
     //settings
     recvAddr.sin_family = AF_INET;
     recvAddr.sin_port = htons(recvport);
-    recvAddr.sin_addr.s_addr = inet_addr(ip_adress);
+    recvAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
     
     sendAddr.sin_family = AF_INET;
     sendAddr.sin_port = htons(sendport);
-    sendAddr.sin_addr.s_addr = inet_addr(ip_adress);
+    sendAddr.sin_addr.s_addr = inet_addr(ip_adress.c_str());
     
     //create socket
     recvSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -122,18 +122,18 @@ void Networking::closeSocket()
 #endif
 
 
-void Networking::sendData(void* data, unsigned long size)
+void Networking::sendData(const void* data, unsigned long size)
 {
-    ssize_t n= sendto(sendSocket, data, size, 0, (struct sockaddr *) &sendAddr, sizeof (sendAddr));
+    unsigned long n= sendto(sendSocket, (const char*)data, size, 0, (struct sockaddr *) &sendAddr, sizeof (sendAddr));
     
-    if (n < 0) {
-        std::cerr << "ERROR: sending bytes" << std::endl;
+    if (n <= 0) {
+        std::cerr << "ERROR: sending zero bytes" << std::endl;
     }
 }
 
 
-long Networking::receiveData(void* data, unsigned long size)
+unsigned long Networking::receiveData(void* data, unsigned long size)
 {
     socklen_t addLength = sizeof (recvAddr);
-    return recvfrom(recvSocket, data, size, 0, (struct sockaddr *) &recvAddr, &addLength);
+    return recvfrom(recvSocket, (char*)data, size, 0, (struct sockaddr *) &recvAddr, &addLength);
 }

@@ -22,6 +22,7 @@
 
 //Include the essential header-files
 #ifdef _WIN32
+#pragma comment(lib, "Ws2_32.lib")
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #endif
@@ -58,8 +59,8 @@ public:
     ~Networking();
     
     bool initSocket(std::string ip_adress, unsigned int sendport, unsigned int recvport);
-    void sendData(void* data, unsigned long size);
-    long receiveData(void* data, unsigned long size);
+    void sendData(const void* data, unsigned long size);
+    unsigned long receiveData(void* data, unsigned long size);
     void closeSocket();
 };
 

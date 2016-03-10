@@ -48,7 +48,7 @@ int main () {
     db.initData();
     
     //init clients
-    ClientExample testClient(&db, "127.0.0.1", 1111, 1111);
+    ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
     
     //main loop
     do
