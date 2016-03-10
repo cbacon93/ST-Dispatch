@@ -7,6 +7,12 @@
 //
 
 
+#ifdef _WIN32
+#pragma comment (lib, "glfw3.lib")
+#pragma comment (lib, "OpenGL32.lib")
+#endif
+
+
 #include <iostream>
 #include <chrono>
 #include <cmath>
