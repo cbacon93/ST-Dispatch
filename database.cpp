@@ -14,4 +14,5 @@ void Database::initData() {
     sim_running.set(false);
     
     exampleCounter.set(0);
+    altitude.set(0);
 }

@@ -59,6 +59,7 @@ public:
     DBElement<bool> sim_running;
     DBElement<bool> sim_resetted;
     DBElement<unsigned int> exampleCounter;
+    DBElement<float> altitude;
 };
 
 

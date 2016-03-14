@@ -88,6 +88,9 @@ int main () {
         //std::cout << wduration.count() << std::endl;
         tc.simulationtime(wduration.count());
         
+        //climb simulation
+        db.altitude.set(db.altitude.get() + 1.f/60.f/wduration.count());
+        
     } // Check if the ESC key was pressed or the window was closed
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
            glfwWindowShouldClose(window) == 0);

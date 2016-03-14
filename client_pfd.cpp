@@ -18,9 +18,10 @@ void ClientPFD::sendInfo() {
     dmcap.gen.grndSpeed = 100;
     dmcap.gen.pitch = 0.18;
     dmcap.gen.roll = 0;
-    dmcap.gen.alt = 0;
+    dmcap.gen.alt = db->altitude.get();
     dmcap.gen.altBaroRefMode = 1;
     dmcap.gen.altBaroRef = 1013;
+    dmcap.gen.altNumCol = (int)(255*255*255* 255 + 255*255* 255 + 255* 0 + 0);
     dmcap.updateSndBuf();
     
     net.sendData(dmcap.buf,dmcap.getSizeExp());
