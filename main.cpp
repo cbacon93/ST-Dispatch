@@ -19,14 +19,15 @@
 #include <GLFW/glfw3.h>
 #include "networking.hpp"
 #include "database.hpp"
-#include "client_example.hpp"
 #include "timer_controller.hpp"
+#include "client_example.hpp"
+#include "client_pfd.hpp"
 
 
 //Constants
 const int WIDTH = 300;
 const int HEIGHT = 200;
-const double FREQUENCY = 50;
+const double FREQUENCY = 25;
 const double RESETWAITTIME = 5;
 
 
@@ -56,6 +57,7 @@ int main () {
     
     //init clients
     ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
+    ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
     
     //main loop
     do
@@ -69,6 +71,7 @@ int main () {
         
         //todo: sending messages
         testClient.sendInfo();
+        clientPFD.sendInfo();
         
         //timer stop
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
