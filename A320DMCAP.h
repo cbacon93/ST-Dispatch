@@ -46,6 +46,12 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#ifdef _WIN32
+#include <algorithm>
+#endif
+
+
+
 #include "A320FMA.h"
 #include "A320TCASINTDR.h"
 using namespace std;
