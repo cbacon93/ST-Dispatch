@@ -34,7 +34,6 @@ int A320DMCAP::updateSndBuf( void ) {
   char *ps, *psStart;
   char *sizePtr, *objCntPtr;
   int  objCnt=0;
-  int  size;
 
   //****************************************
   // protocol start
@@ -108,7 +107,7 @@ int A320DMCAP::updateSndBuf( void ) {
   //****************************************
 
   //---- setup packet size ----
-  size = ps - psStart;
+  size = (int)(ps - psStart);
   *(int*)sizePtr   = size;                                                     //!< [-]   store byte length of actual packet.
   //---- setup nr. objects ----
   *(int*)objCntPtr = objCnt;                                                   //!< [-]   store number of objects.
@@ -159,7 +158,7 @@ int A320DMCAP::analyseRcvBuf( int rcvSizeAct ) {
   //****************************************
   // protocol end; check total size
   //****************************************
-  sizeTot = ps - psStart;
+  sizeTot = (int)(ps - psStart);
   if( sizeTot!=rcvSizeAct   ) return DMCAP_STAT_SIZEERR_TOT;
 
   return DMCAP_STAT_OK;

@@ -56,7 +56,7 @@ int main () {
     db.initData();
     
     //init clients
-    ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
+    //ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
     ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
     
     //main loop
@@ -70,7 +70,7 @@ int main () {
         draw();
         
         //todo: sending messages
-        testClient.sendInfo();
+        //testClient.sendInfo();
         clientPFD.sendInfo();
         
         //timer stop

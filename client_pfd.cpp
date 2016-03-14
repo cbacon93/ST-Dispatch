@@ -8,27 +8,22 @@
 
 #include "client_pfd.hpp"
 
-struct charstr {
-    char x[5];
-};
 
 
 void ClientPFD::sendInfo() {
-    DMCAP dmcap;
     
-    memset(&dmcap, 0, sizeof(DMCAP));
+    dmcap.fplanCnt = 0;
+    dmcap.navObjCnt = 0;
+    dmcap.gen.indAirSpeed = 100;
+    dmcap.gen.grndSpeed = 100;
+    dmcap.gen.pitch = 0.18;
+    dmcap.gen.roll = 0;
+    dmcap.gen.alt = 0;
+    dmcap.gen.altBaroRefMode = 1;
+    dmcap.gen.altBaroRef = 1013;
+    dmcap.updateSndBuf();
     
-    dmcap.header.version = 2.0f;
-    dmcap.header.size = sizeof(DMCAP);
-    dmcap.header.reply = 0;
-    dmcap.header.objCnt = 1;
-    
-    dmcap.object.objHeader.typ = 0;
-    dmcap.object.objHeader.len = sizeof(DMCAPObject);
-    dmcap.object.objHeader.index = 1;
-    dmcap.object.objHeader.setup = 0;
-    
-    net.sendData(&dmcap, sizeof(dmcap));
+    net.sendData(dmcap.buf,dmcap.getSizeExp());
 }
 
 

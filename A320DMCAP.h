@@ -5,6 +5,7 @@
 //!
 //! \brief  Header file for the DMC animation protocol - DMCAP.
 //! \author Jürgen Gotschlich (J.R.G)
+//! \modified by Marcel Haupt
 //!
 //! Protocol definition
 //! -------------------
@@ -54,7 +55,7 @@ using namespace std;
 //!---- general ----
 const float DMCAP_VERSION                  = 2.0;            //!< The current version
 const string DMCAP_VERSION_STRING          = "2.0.0";        //!< The current version
-const int   DMCAP_MAX_RECV_BUFFER          = 1024*1024;	     //!< maximum receiving buffer size
+const int   DMCAP_MAX_RECV_BUFFER          = 1024*10;	     //!< maximum receiving buffer size
 const float DMCAP_DtoR                     = 1.745329252e-2; //!< convert DEG to RAD
 
 //!---- return values ----
@@ -542,11 +543,6 @@ typedef struct {
     DMCAP_OBJ_NAV       nav;
   } u;
 } DMCAP_OBJ;   
-
-
-void main() {
-	std::cout << sizeof(DMCAP_OBJ_GEN_DATA);
-}
 
 
 //**************************************
