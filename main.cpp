@@ -22,6 +22,7 @@
 #include "timer_controller.hpp"
 #include "client_example.hpp"
 #include "client_pfd.hpp"
+#include "client_xplane.hpp"
 
 
 //Constants
@@ -58,6 +59,7 @@ int main () {
     //init clients
     //ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
     ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
+    ClientXplane clientXplane(&db, "192.168.178.21", 49001, 49000);
     
     //main loop
     do
@@ -87,10 +89,6 @@ int main () {
         std::chrono::duration<double> wduration = std::chrono::duration_cast<std::chrono::duration<double>>(wt2 - wt1);
         //std::cout << wduration.count() << std::endl;
         tc.simulationtime(wduration.count());
-        
-        //climb simulation
-        db.altitude.set(db.altitude.get() + 1.f/60.f/wduration.count());
-        
     } // Check if the ESC key was pressed or the window was closed
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
            glfwWindowShouldClose(window) == 0);

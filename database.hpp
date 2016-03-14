@@ -56,10 +56,34 @@ class Database {
 public:
     void initData();
     
+    //sim flags
     DBElement<bool> sim_running;
     DBElement<bool> sim_resetted;
-    DBElement<unsigned int> exampleCounter;
-    DBElement<float> altitude;
+
+    //speed
+    DBElement<float> vKIAS;
+    DBElement<float> vKTAS;
+    DBElement<float> vKTGS;
+    DBElement<float> vMach;
+    DBElement<float> vVS;
+    
+    //input
+    DBElement<float> iAiln;
+    DBElement<float> iElev;
+    DBElement<float> iRuddr;
+    
+    //attitude
+    DBElement<float> aPitch;
+    DBElement<float> aRoll;
+    DBElement<float> aTHDG;
+    DBElement<float> aMHDG;
+    DBElement<float> lat;
+    DBElement<float> lon;
+    
+    //altitudes
+    DBElement<float> aHGT;
+    DBElement<float> aPA;
+    DBElement<float> aIA;
 };
 
 

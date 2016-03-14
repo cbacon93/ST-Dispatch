@@ -14,13 +14,32 @@ void ClientPFD::sendInfo() {
     
     dmcap.fplanCnt = 0;
     dmcap.navObjCnt = 0;
-    dmcap.gen.indAirSpeed = 100;
-    dmcap.gen.grndSpeed = 100;
-    dmcap.gen.pitch = 0.18;
-    dmcap.gen.roll = 0;
-    dmcap.gen.alt = db->altitude.get();
+    
+    dmcap.gen.flightPhase = 5;
+    
+    dmcap.gen.indAirSpeed = db->vKIAS.get();
+    dmcap.gen.grndSpeed = db->vKTGS.get();
+    dmcap.gen.vspeed = db->vVS.get();
+    dmcap.gen.machVis = 1;
+    dmcap.gen.mach = db->vMach.get();
+    
+    dmcap.gen.pitch = db->aPitch.get();
+    dmcap.gen.roll = -db->aRoll.get();
+    dmcap.gen.ssIndicationVis = 1;
+    dmcap.gen.elCmdSs = db->iElev.get();
+    dmcap.gen.aiCmdSs = db->iAiln.get();
+    
+    dmcap.gen.alt = db->aIA.get()*0.3048;
+    dmcap.gen.altRadAlt = db->aHGT.get()*0.3048;
     dmcap.gen.altBaroRefMode = 1;
     dmcap.gen.altBaroRef = 1013;
+    dmcap.gen.altRadAltVis = 1;
+    
+    dmcap.gen.head = db->aTHDG.get();
+    dmcap.gen.lat = db->lat.get();
+    dmcap.gen.lon = db->lon.get();
+    
+    dmcap.gen.vspeedCol = (int)(255*255*255* 255 + 255*255* 255 + 255* 0 + 0);
     dmcap.gen.altNumCol = (int)(255*255*255* 255 + 255*255* 255 + 255* 0 + 0);
     dmcap.updateSndBuf();
     
