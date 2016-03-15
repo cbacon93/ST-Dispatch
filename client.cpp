@@ -8,7 +8,7 @@
 
 #include "client.hpp"
 
-
+// must be inherited from the client subclasses!
 Client::Client(Database * _db, std::string ip_adress, unsigned int sendPort, unsigned int recvPort):
     net(Networking())
 {
@@ -21,7 +21,7 @@ Client::Client(Database * _db, std::string ip_adress, unsigned int sendPort, uns
 }
 
 
-
+//thread
 void Client::recvThreadLoop(Client * inst) {
     bool running = true;
     
@@ -48,6 +48,7 @@ void Client::joinThread() {
 }
 
 
+//close thread
 Client::~Client() {
     net.closeSocket();
     joinThread();

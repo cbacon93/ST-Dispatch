@@ -15,6 +15,7 @@ void ClientExample::sendInfo() {
     //take data from database
     data.reset = db->sim_resetted.get();
     data.running = db->sim_running.get();
+    data.counter = db->exampleCntr.get();
     
     net.sendData(&data, sizeof(data));
 }
@@ -32,5 +33,5 @@ void ClientExample::receiveInfo() {
     std::cout << "Received " << n << " bytes - counter: " << data.counter << " / " << n << std::endl;
     
     //save data in database
-    //db->exampleCounter.set(data.counter);
+    db->exampleCntr.set(data.counter);
 }

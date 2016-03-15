@@ -31,6 +31,9 @@ private:
     //sicherungs mutex
     std::mutex mtx;
 public:
+    DBElement() {
+        value = (T) 0;
+    }
     
     void set(T _newvalue) {
         //mutex lock - not read and write at the same time
@@ -55,6 +58,8 @@ public:
 class Database {
 public:
     void initData();
+    
+    DBElement<int> exampleCntr;
     
     //sim flags
     DBElement<bool> sim_running;
@@ -84,6 +89,12 @@ public:
     DBElement<float> aHGT;
     DBElement<float> aPA;
     DBElement<float> aIA;
+    
+    //autopilot
+    DBElement<float> apSpeed;
+    DBElement<float> apHding;
+    DBElement<float> apVvi;
+    DBElement<float> apAlt;
 };
 
 

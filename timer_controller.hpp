@@ -10,6 +10,12 @@
 #define timer_controller_hpp
 #include <vector>
 
+
+/*
+ Nimmt Stoppuhraufgaben an
+ Ruft Callbackfunktion bei Ablauf des Timers
+ */
+
 class TimerControllerElement {
 public:
     void (*callback)(int) = 0;

@@ -21,7 +21,7 @@ private:
         float vIndKeas;
         float vTrueKtas;
         float vTrueKtgs;
-        
+        float none1;
         float vIndMph;
         float vTrueMphas;
         float vTrueMphgs;
@@ -29,7 +29,9 @@ private:
     
     struct recvData4 {
         float mach;
+        float none1;
         float vvi;
+        float none2;
         float gloadn;
         float gloada;
         float gloads;
@@ -57,6 +59,17 @@ private:
         float altind;
         float lats;
         float lonw;
+    };
+    
+    struct recvData118 {
+        float speed;
+        float hding;
+        float vvi;
+        float alt;
+        float vnavAlt;
+        float useAlt;
+        float syncRoll;
+        float syncPitch;
     };
     
 public:

@@ -56,8 +56,8 @@ int main () {
     //init database
     db.initData();
     
-    //init clients
-    //ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
+    //init clients - ip - sendport - recvport
+    ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
     ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
     ClientXplane clientXplane(&db, "192.168.178.21", 49001, 49000);
     
@@ -71,8 +71,8 @@ int main () {
         //drawing GUI
         draw();
         
-        //todo: sending messages
-        //testClient.sendInfo();
+        //sending synchron messages
+        testClient.sendInfo();
         clientPFD.sendInfo();
         
         //timer stop
@@ -89,6 +89,8 @@ int main () {
         std::chrono::duration<double> wduration = std::chrono::duration_cast<std::chrono::duration<double>>(wt2 - wt1);
         //std::cout << wduration.count() << std::endl;
         tc.simulationtime(wduration.count());
+        
+        
     } // Check if the ESC key was pressed or the window was closed
     while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
            glfwWindowShouldClose(window) == 0);
@@ -103,12 +105,15 @@ int main () {
 
 
 void draw() {
-    glLoadIdentity();
     
+    //set draw matrix to identity
+    //clear screen
+    glLoadIdentity();
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
     
+    //draw squares
     //stop
     if (db.sim_running.get())
         glColor3f(1.0, 0.0, 0.0);
@@ -145,9 +150,10 @@ void draw() {
     glVertex3f(0.50, 1.00, 0.0);
     glEnd();
 
+    //write squares to back buffer
     glFlush();
     
-    // Swap buffers
+    // Swap buffers - back to front buffer
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
@@ -181,25 +187,34 @@ int initGL() {
 }
 
 
+//called when a mouse button is clicked inside the window
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
+    //only act if its the left mouse button
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         double px, py;
         glfwGetCursorPos(window, &px, &py);
         
         //std::cout << "Cursor Position: " << px << " / " << py << std::endl;
         
+        //press on start
         if (px < WIDTH/2 && py < HEIGHT/2 && !db.sim_running.get()) {
             std::cout << "starting simulation" << std::endl;
             db.sim_running.set(true);
         }
+        
+        //press on stop
         if (px < WIDTH/2 && py >= HEIGHT/2 && db.sim_running.get()) {
             std::cout << "stopping simulation" << std::endl;
             db.sim_running.set(false);
         }
+        
+        //press on reset
         if (px >= WIDTH/2 && !db.sim_resetted.get()) {
             std::cout << "resetting simulation" << std::endl;
             db.sim_resetted.set(true);
+            
+            //add timer after several seconds, deactivate reset flag
             if (db.sim_running.get()) {
                 db.sim_running.set(false);
                 tc.addController(sim_start_timeout, 1, RESETWAITTIME);
@@ -212,12 +227,14 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 
+//reset timer timeout callback
 void sim_start_timeout(int run) {
     db.sim_running.set((bool)run);
     db.sim_resetted.set(false);
 }
 
 
+//own platform independend sleep funcion
 void mySleep(int ms) {
 #ifdef __APPLE__
     usleep(ms * 1000);
