@@ -17,6 +17,7 @@
 #include <chrono>
 #include <cmath>
 #include <GLFW/glfw3.h>
+#include <unistd.h>
 #include "networking.hpp"
 #include "database.hpp"
 #include "timer_controller.hpp"
@@ -29,7 +30,7 @@
 const int WIDTH = 300;
 const int HEIGHT = 200;
 const double FREQUENCY = 25;
-const double RESETWAITTIME = 5;
+const double RESETWAITTIME = 5; //Sekunden
 
 
 //init functions
@@ -57,7 +58,7 @@ int main () {
     db.initData();
     
     //init clients - ip - sendport - recvport
-    ClientExample testClient(&db, "192.168.178.21", 1111, 1112);
+    ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
     ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
     ClientXplane clientXplane(&db, "192.168.178.21", 49001, 49000);
     
