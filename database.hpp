@@ -72,6 +72,10 @@ public:
     DBElement<float> vMach;
     DBElement<float> vVS;
     
+    //wind
+    DBElement<float> vWind;
+    DBElement<float> dirWind;
+    
     //input
     DBElement<float> iAiln;
     DBElement<float> iElev;
@@ -81,6 +85,7 @@ public:
     DBElement<float> aPitch;
     DBElement<float> aRoll;
     DBElement<float> aTHDG;
+    DBElement<float> aTCRS;
     DBElement<float> aMHDG;
     DBElement<float> lat;
     DBElement<float> lon;

@@ -11,4 +11,8 @@
 
 //to be implemented if necessary
 void Database::initData() {
+    this->lat.set(52.191);
+    this->lon.set(10.331);
+    
+    this->aTHDG.set(0);
 }

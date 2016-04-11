@@ -29,7 +29,7 @@ class Client {
 protected:
     Networking net;
     std::thread th;
-    Database *db;
+    Database * db;
 public:
     Client(Database * _db, std::string ip_adress, unsigned int sendPort, unsigned int recvPort);
     ~Client();

@@ -61,8 +61,8 @@ bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsign
 #ifdef __APPLE__
 void Networking::closeSocket()
 {
-    close(recvSocket);
-    close(sendSocket);
+    //close(recvSocket);
+    //close(sendSocket);
 }
 #endif
 

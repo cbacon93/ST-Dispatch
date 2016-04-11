@@ -24,6 +24,7 @@
 #include "client_example.hpp"
 #include "client_pfd.hpp"
 #include "client_xplane.hpp"
+#include "client_anzeigen.hpp"
 
 
 //Constants
@@ -44,8 +45,7 @@ void mySleep(int ms);
 //global variables
 Database db; //used for access to database
 TimerController tc;
-GLFWwindow* window;
-
+GLFWwindow * window;
 
 
 
@@ -58,9 +58,10 @@ int main () {
     db.initData();
     
     //init clients - ip - sendport - recvport
-    ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
-    ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
-    ClientXplane clientXplane(&db, "192.168.178.21", 49001, 49000);
+    //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
+    //ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
+    //ClientXplane clientXplane(&db, "192.168.178.21", 49001, 49000);
+    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 9876, 56787);
     
     //main loop
     do
@@ -73,8 +74,9 @@ int main () {
         draw();
         
         //sending synchron messages
-        testClient.sendInfo();
-        clientPFD.sendInfo();
+        //testClient.sendInfo();
+        //clientPFD.sendInfo();
+        clientAnzeigen.sendInfo();
         
         //timer stop
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
@@ -97,7 +99,7 @@ int main () {
            glfwWindowShouldClose(window) == 0);
     
     glfwTerminate();
-    std::cout << "Stutting down" << std::endl;
+    std::cout << "Shutting down" << std::endl;
     
     return 0;
 }
@@ -171,7 +173,7 @@ int initGL() {
         return 1;
     }
 
-    
+
     window = glfwCreateWindow(WIDTH, HEIGHT, "ST-Dispatch", NULL, NULL);
     if (window == NULL) {
         std::cerr << "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible.\n";
