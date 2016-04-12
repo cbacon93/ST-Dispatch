@@ -32,6 +32,7 @@
 #include <netinet/in.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 #endif
 
 #include <iostream>

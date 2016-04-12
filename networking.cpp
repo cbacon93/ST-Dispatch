@@ -42,10 +42,12 @@ bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsign
     recvSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     sendSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     
-    
-    if (bind(recvSocket, (struct sockaddr*)& recvAddr, sizeof(recvAddr)) < 0) {
-        std::cerr << "ERROR: Could not bind Socket " << ip_adress << ":" << recvport << std::endl;
-        return false;
+    //bind only if recvport > 0
+    if (recvport > 0) {
+        if (bind(recvSocket, (struct sockaddr*)& recvAddr, sizeof(recvAddr)) < 0) {
+            std::cerr << "ERROR: Could not bind Socket " << ip_adress << ":" << recvport << std::endl;
+            return false;
+        }
     }
     
     if (recvSocket < 0 || sendSocket < 0) {
@@ -61,8 +63,8 @@ bool Networking::initSocket(std::string ip_adress, unsigned int sendport, unsign
 #ifdef __APPLE__
 void Networking::closeSocket()
 {
-    //close(recvSocket);
-    //close(sendSocket);
+    close(recvSocket);
+    close(sendSocket);
 }
 #endif
 
