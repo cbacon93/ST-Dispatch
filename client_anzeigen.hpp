@@ -10,6 +10,7 @@
 #define client_anzeigen_hpp
 
 #include "client.hpp"
+#pragma pack(1)
 
 class ClientAnzeigen : public Client {
 private:
