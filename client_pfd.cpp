@@ -30,7 +30,9 @@ void ClientPFD::sendInfo() {
     dmcap.gen.ssIndicationVis = 1;
     dmcap.gen.elCmdSs = db->iElev.get();
     dmcap.gen.aiCmdSs = db->iAiln.get();
-    dmcap.gen.head = db->aMHDG.get();
+    dmcap.gen.head = db->aTHDG.get();
+    dmcap.gen.headActTrack = db->aTCRS.get();
+    dmcap.gen.headActTrackVis = 1;
     
     //height
     dmcap.gen.alt = db->aIA.get();
@@ -44,6 +46,47 @@ void ClientPFD::sendInfo() {
     dmcap.gen.altTargetSelAlt = db->apAlt.get();
     dmcap.gen.headSel = db->apHding.get();
     dmcap.gen.headSelVis = 1;
+    //dmcap.gen.pfdALTFlagVis = db->apALTHoldEngaged.get();
+    //dmcap.gen.pfdSPDFlagVis = db->apSpeedHoldEngaged.get();
+    //dmcap.gen.pfdHDGFlagVis = db->apHDGHoldEngaged.get();
+    
+    //FMA
+    FMA fma1;
+    memset(&fma1, 0, sizeof(FMA));
+    sprintf(fma1.text, "AP1");
+    fma1.textVis = db->apEngaged.get();
+    
+    FMA fma2;
+    memset(&fma2, 0, sizeof(FMA));
+    sprintf(fma2.text, "ALT");
+    fma2.textVis = db->apALTHoldEngaged.get();
+    
+    FMA fma3;
+    memset(&fma3, 0, sizeof(FMA));
+    sprintf(fma3.text, "Speed");
+    fma3.textVis = db->apSpeedHoldEngaged.get();
+    
+    FMA fma4;
+    memset(&fma4, 0, sizeof(FMA));
+    sprintf(fma4.text, "HDG");
+    fma4.textVis = db->apHDGHoldEngaged.get();
+    
+    FMA fma5;
+    memset(&fma5, 0, sizeof(FMA));
+    sprintf(fma5.text, "ILS");
+    fma5.textVis = 0;
+    
+    FMA fma6;
+    memset(&fma6, 0, sizeof(FMA));
+    sprintf(fma6.text, "A/THR");
+    fma6.textVis = db->apSpeedHoldEngaged.get();
+    
+    dmcap.gen.fmaVis = 1;
+    dmcap.gen.fma[0][0] = fma3;
+    dmcap.gen.fma[0][1] = fma2;
+    dmcap.gen.fma[0][2] = fma4;
+    dmcap.gen.fma[0][4] = fma1;
+    dmcap.gen.fma[2][4] = fma6;
     
     //misc
     dmcap.gen.lat = db->lat.get();

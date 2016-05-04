@@ -35,12 +35,29 @@ private:
         float gloadn;
         float gloada;
         float gloads;
+        float none3;
+    };
+    
+    struct recvData5 {
+        float slprs;
+        float sltmp;
+        float none1;
+        float windspeed;
+        float winddir;
+        float trb;
+        float prec;
+        float hail;
     };
     
     struct recvData8 {
         float elev;
         float ailn;
         float ruddr;
+        float none1;
+        float none2;
+        float none3;
+        float none4;
+        float none5;
     };
     
     struct recvData17 {
@@ -48,6 +65,21 @@ private:
         float roll;
         float thding;
         float mhding;
+        float none1;
+        float none2;
+        float none3;
+        float none4;
+    };
+    
+    struct recvData18 {
+        float alpha;
+        float beta;
+        float hpath;
+        float vpath;
+        float none1;
+        float none2;
+        float none3;
+        float slip;
     };
     
     struct recvData20 {
@@ -59,6 +91,39 @@ private:
         float altind;
         float lats;
         float lonw;
+    };
+    
+    struct recvData108 {
+        float ap;
+        float fdirmode;
+        float fdirpitch;
+        float fdirroll;
+        float none1;
+        float hudpower;
+        float hudbrite;
+        float none2;
+    };
+    
+    struct recvData116 {
+        float navarm;
+        float altarm;
+        float apparm;
+        float vnavenab;
+        float vnavarm;
+        float vnavtime;
+        float gpenab;
+        float apptyp;
+    };
+    
+    struct recvData117 {
+        float autothrot;
+        float modehding;
+        float modealt;
+        float none1;
+        float bac;
+        float app;
+        float none2;
+        float sync;
     };
     
     struct recvData118 {

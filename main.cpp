@@ -59,9 +59,9 @@ int main () {
     
     //init clients - ip - sendport - recvport
     //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
-    //ClientPFD clientPFD(&db, "192.168.178.21", 23004, 9999);
-    //ClientXplane clientXplane(&db, "192.168.178.21", 49001, 49000);
-    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 9876, 56787);
+    ClientPFD clientPFD(&db, "192.168.178.38", 23004, 0);
+    ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
+    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 9876, 0);
     
     //main loop
     do
@@ -75,7 +75,7 @@ int main () {
         
         //sending synchron messages
         //testClient.sendInfo();
-        //clientPFD.sendInfo();
+        clientPFD.sendInfo();
         clientAnzeigen.sendInfo();
         
         //timer stop

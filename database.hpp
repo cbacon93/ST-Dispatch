@@ -96,10 +96,19 @@ public:
     DBElement<float> aIA;
     
     //autopilot
+    DBElement<bool> apEngaged;
+    DBElement<bool> apHDGHoldEngaged;
+    DBElement<bool> apALTHoldEngaged;
+    DBElement<bool> apSpeedHoldEngaged;
     DBElement<float> apSpeed;
     DBElement<float> apHding;
     DBElement<float> apVvi;
     DBElement<float> apAlt;
+    
+    //ILS
+    DBElement<bool> ilsAlive;
+    DBElement<float> ilsGs;
+    DBElement<float> ilsLoc;
 };
 
 

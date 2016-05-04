@@ -9,6 +9,7 @@
 #ifndef client_pfd_hpp
 #define client_pfd_hpp
 
+#include <stdio.h>
 #include "client.hpp"
 #include "A320DMCAP.h"
 

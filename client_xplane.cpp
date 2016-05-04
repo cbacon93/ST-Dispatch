@@ -53,6 +53,13 @@ void ClientXplane::receiveInfo() {
                     db->vVS.set(0);
                 
                 break;
+                
+            case 5:
+                recvData5 data5;
+                memcpy(&data5, buffer + dn, sizeof(data5));     dn += sizeof(data5);
+                db->vWind.set(data5.windspeed);
+                db->dirWind.set(data5.winddir/180.f*3.14159265f);
+                break;
             case 8:
                 recvData8 data8;
                 memcpy(&data8, buffer + dn, sizeof(data8));     dn += sizeof(data8);
@@ -68,6 +75,11 @@ void ClientXplane::receiveInfo() {
                 db->aTHDG.set(data17.thding/180.f*3.14159265f);
                 db->aMHDG.set(data17.mhding/180.f*3.14159265f);
                 break;
+            case 18:
+                recvData18 data18;
+                memcpy(&data18, buffer + dn, sizeof(data18));   dn += sizeof(data18);
+                db->aTCRS.set(data18.hpath/180.f*3.14159265f);
+                break;
             case 20:
                 recvData20 data20;
                 memcpy(&data20, buffer + dn, sizeof(data20));   dn += sizeof(data20);
@@ -76,6 +88,44 @@ void ClientXplane::receiveInfo() {
                 db->aPA.set(data20.altmsl*0.3048);
                 db->lat.set(data20.lat);
                 db->lon.set(data20.lon);
+                break;
+            case 108:
+                recvData108 data108;
+                memcpy(&data108, buffer + dn, sizeof(data108));   dn += sizeof(data108);
+                
+                if (data108.fdirmode == 2.0f) {
+                    db->apEngaged.set(true);
+                } else {
+                    db->apEngaged.set(false);
+                }
+                
+                break;
+            case 116:
+                recvData116 data116;
+                memcpy(&data116, buffer + dn, sizeof(data116));   dn += sizeof(data116);
+                break;
+            case 117:
+                recvData117 data117;
+                memcpy(&data117, buffer + dn, sizeof(data117));   dn += sizeof(data117);
+                
+                if (data117.autothrot == 1.0f) {
+                    db->apSpeedHoldEngaged.set(true);
+                } else {
+                    db->apSpeedHoldEngaged.set(false);
+                }
+                
+                if (data117.modehding == 1.0f) {
+                    db->apHDGHoldEngaged.set(true);
+                } else {
+                    db->apHDGHoldEngaged.set(false);
+                }
+                
+                if (data117.modealt == 6.0f) {
+                    db->apALTHoldEngaged.set(true);
+                } else {
+                    db->apALTHoldEngaged.set(false);
+                }
+                
                 break;
             case 118:
                 recvData118 data118;
