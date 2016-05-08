@@ -61,7 +61,7 @@ int main () {
     //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
     ClientPFD clientPFD(&db, "192.168.178.38", 23004, 0);
     ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
-    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 9876, 0);
+    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 10001, 0);
     
     //main loop
     do
