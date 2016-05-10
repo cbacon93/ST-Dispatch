@@ -25,6 +25,7 @@
 #include "client_pfd.hpp"
 #include "client_xplane.hpp"
 #include "client_anzeigen.hpp"
+#include "client_hardware.hpp"
 
 
 //Constants
@@ -62,6 +63,7 @@ int main () {
     ClientPFD clientPFD(&db, "192.168.178.38", 23004, 0);
     ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
     ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 10001, 0);
+	ClientHardware clientHardware(&db, "192.168.0.7", 10009, 10010); // ports richtige Reihenfolge?
     
     //main loop
     do
@@ -77,6 +79,7 @@ int main () {
         //testClient.sendInfo();
         clientPFD.sendInfo();
         clientAnzeigen.sendInfo();
+		clientHardware.sendInfo()
         
         //timer stop
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();

@@ -80,6 +80,8 @@ public:
     DBElement<float> iAiln;
     DBElement<float> iElev;
     DBElement<float> iRuddr;
+	DBElement<float> iFlaps;
+	DBElement<double> iTrim;
     
     //attitude
     DBElement<float> aPitch;
@@ -109,6 +111,9 @@ public:
     DBElement<bool> ilsAlive;
     DBElement<float> ilsGs;
     DBElement<float> ilsLoc;
+
+	//gear
+	DBElement<bool> gear_down;
 };
 
 
