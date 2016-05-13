@@ -75,6 +75,9 @@ public:
     //wind
     DBElement<float> vWind;
     DBElement<float> dirWind;
+    DBElement<double> xWind; //u
+    DBElement<double> yWind; //v
+    DBElement<double> zWind; //w
     
     //input
     DBElement<float> iAiln;
