@@ -28,7 +28,7 @@ void ClientEnvironment::receiveInfo() {
     recvData data;
     unsigned long n = net.receiveData(&data, sizeof(data));
     
-    //corrupt data -> abort
+    //corrupt data -> abor
     if (n != sizeof(data))
         return;
     
@@ -39,6 +39,6 @@ void ClientEnvironment::receiveInfo() {
     db->xWind.set(data.u);
     db->yWind.set(data.v);
     db->zWind.set(data.w);
-    db->iElev.set(data.Elevation);
+    db->aHGT.set(data.Elevation);
     
 }
