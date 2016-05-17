@@ -10,6 +10,7 @@
 #define database_hpp
 
 #include <mutex>
+#include <iostream>
 
 /*
  Speichert alle Variablen,
@@ -58,6 +59,7 @@ public:
 class Database {
 public:
     void initData();
+    void debugOutput();
     
     DBElement<int> exampleCntr;
     
@@ -66,49 +68,66 @@ public:
     DBElement<bool> sim_resetted;
 
     //speed
-    DBElement<float> vKIAS;
-    DBElement<float> vKTAS;
-    DBElement<float> vKTGS;
-    DBElement<float> vMach;
-    DBElement<float> vVS;
+    DBElement<double> vKIAS;
+    DBElement<double> vKTAS;
+    DBElement<double> vKTGS;
+    DBElement<double> vMach;
+    DBElement<double> vVS;
     
     //wind
-    DBElement<float> vWind;
-    DBElement<float> dirWind;
+    DBElement<double> vWind;
+    DBElement<double> dirWind;
+    DBElement<double> xWind; //u
+    DBElement<double> yWind; //v
+    DBElement<double> zWind; //w
+    DBElement<double> xRotWind;
+    DBElement<double> yRotWind;
+    DBElement<double> zRotWind;
     
     //input
-    DBElement<float> iAiln;
-    DBElement<float> iElev;
-    DBElement<float> iRuddr;
+    DBElement<double> iAiln;
+    DBElement<double> iElev;
+    DBElement<double> iRuddr;
+    DBElement<long>   iFlaps;
+    DBElement<double> iTrim;
+    DBElement<double> iThrott;
+    DBElement<double> iBreak;
+    DBElement<double> iSpeedBreak;
+    
+    //gear
+    DBElement<bool> gear_lever;
+    DBElement<bool> gear_down;
+    DBElement<bool> gear_up;
     
     //attitude
-    DBElement<float> aPitch;
-    DBElement<float> aRoll;
-    DBElement<float> aTHDG;
-    DBElement<float> aTCRS;
-    DBElement<float> aMHDG;
-    DBElement<float> lat;
-    DBElement<float> lon;
+    DBElement<double> aPitch;
+    DBElement<double> aRoll;
+    DBElement<double> aTHDG;
+    DBElement<double> aTCRS;
+    DBElement<double> aMHDG;
+    DBElement<double> lat;
+    DBElement<double> lon;
+    DBElement<double> elevation;
     
     //altitudes
-    DBElement<float> aHGT;
-    DBElement<float> aPA;
-    DBElement<float> aIA;
+    DBElement<double> aHGT;
+    DBElement<double> aPA;
+    DBElement<double> aIA;
     
     //autopilot
     DBElement<bool> apEngaged;
     DBElement<bool> apHDGHoldEngaged;
     DBElement<bool> apALTHoldEngaged;
     DBElement<bool> apSpeedHoldEngaged;
-    DBElement<float> apSpeed;
-    DBElement<float> apHding;
-    DBElement<float> apVvi;
-    DBElement<float> apAlt;
+    DBElement<double> apSpeed;
+    DBElement<double> apHding;
+    DBElement<double> apVvi;
+    DBElement<double> apAlt;
     
     //ILS
     DBElement<bool> ilsAlive;
-    DBElement<float> ilsGs;
-    DBElement<float> ilsLoc;
+    DBElement<double> ilsGs;
+    DBElement<double> ilsLoc;
 };
 
 

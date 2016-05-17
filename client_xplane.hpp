@@ -12,6 +12,8 @@
 #include <string>
 #include "client.hpp"
 
+#pragma pack(1)
+
 class ClientXplane : public Client {
 private:
     //data structures

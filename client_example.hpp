@@ -11,6 +11,8 @@
 
 #include "client.hpp"
 
+#pragma pack(1)
+
 class ClientExample : public Client {
 private:
     //data structures
