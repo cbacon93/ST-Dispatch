@@ -18,9 +18,15 @@
 
 class TimerControllerElement {
 public:
-    void (*callback)(int) = 0;
-    double time = 0;
-    int parameter = 0;
+    TimerControllerElement() {
+        callback = 0;
+        time = 0;
+        parameter = 0;
+    }
+    
+    void (*callback)(int);
+    double time;
+    int parameter;
 };
 
 

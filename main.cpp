@@ -12,12 +12,14 @@
 #pragma comment (lib, "OpenGL32.lib")
 #endif
 
+#ifdef __APPLE__
+#include <unistd.h>
+#endif
 
 #include <iostream>
 #include <chrono>
 #include <cmath>
 #include <GLFW/glfw3.h>
-#include <unistd.h>
 #include "networking.hpp"
 #include "database.hpp"
 #include "timer_controller.hpp"
