@@ -30,7 +30,7 @@ void ClientExample::receiveInfo() {
         return;
     
     //echo /debug/
-    std::cout << "Received " << n << " bytes - counter: " << data.counter << " / " << n << std::endl;
+    std::cout << "Example Received " << n << " / " << n << " bytes" << std::endl;
     
     //save data in database
     db->exampleCntr.set(data.counter);

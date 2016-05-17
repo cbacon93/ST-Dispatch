@@ -46,7 +46,7 @@ void ClientModell::receiveInfo() {
     }
     
     //echo /debug/
-    std::cout << "Modell Received " << n << " bytes " << " / " << n << std::endl;
+    std::cout << "Modell Received " << n << " / " << n << " bytes" << std::endl;
     
     //save data in database
     db->vKIAS.set(data.airspeed);
@@ -54,15 +54,14 @@ void ClientModell::receiveInfo() {
     db->vMach.set(data.mach);
     db->vVS.set(data.vspeed);
     db->aPA.set(data.alt);
+    db->aIA.set(data.alt);
     db->lat.set(data.lat);
     db->lon.set(data.lon);
     db->aRoll.set(data.roll);
     db->aPitch.set(data.pitch);
     db->aTHDG.set(data.hdg);
-    db->aMHDG.set(data.hdg);
+    db->aMHDG.set(data.hdg-0.05);
     db->aTCRS.set(data.track);
     db->gear_up.set(data.gear_up);
     db->gear_down.set(data.gear_dn);
-    
-    //db->debugOutput();
 }
