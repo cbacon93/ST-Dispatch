@@ -39,7 +39,12 @@ void ClientPFD::sendInfo() {
     dmcap.gen.altRadAlt = db->aHGT.get();
     dmcap.gen.altBaroRefMode = 1;
     dmcap.gen.altBaroRef = 1013;
-    dmcap.gen.altRadAltVis = 1;
+    
+    if (db->aHGT.get() <= 2500) {
+        dmcap.gen.altRadAltVis = 1;
+    } else {
+        dmcap.gen.altRadAltVis = 0;
+    }
     
     //autopilot
     dmcap.gen.targetSpeed = db->apSpeed.get();
@@ -49,6 +54,17 @@ void ClientPFD::sendInfo() {
     //dmcap.gen.pfdALTFlagVis = db->apALTHoldEngaged.get();
     //dmcap.gen.pfdSPDFlagVis = db->apSpeedHoldEngaged.get();
     //dmcap.gen.pfdHDGFlagVis = db->apHDGHoldEngaged.get();
+    
+    //ILS
+    dmcap.gen.glsVis = db->ilsAlive.get();
+    dmcap.gen.glsIndexVis = db->ilsAlive.get();
+    dmcap.gen.locVis = db->ilsAlive.get();
+    dmcap.gen.locIndexVis = db->ilsAlive.get();
+    dmcap.gen.pfdIlsInfoVis = db->ilsAlive.get();
+    dmcap.gen.pfdIlsMsgVis = db->ilsAlive.get();
+    dmcap.gen.loc = db->ilsLoc.get();
+    dmcap.gen.gls = db->ilsGs.get();
+    
     
     //FMA
     FMA fma1;
