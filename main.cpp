@@ -27,7 +27,11 @@
 #include "client_pfd.hpp"
 #include "client_xplane.hpp"
 #include "client_anzeigen.hpp"
+<<<<<<< HEAD
 #include "client_modell.hpp"
+=======
+#include "client_hardware.hpp"
+>>>>>>> 5e55588cfc514a3ca1c4952d3486005f644896ff
 
 
 //Constants
