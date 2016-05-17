@@ -41,7 +41,7 @@ void ClientModell::receiveInfo() {
     
     //corrupt data -> abort
     if (n != sizeof(data)) {
-        std::cout << "Data Mismatch..." << std::endl;
+        std::cout << "Modell Data Mismatch..." << std::endl;
         return;
     }
     
@@ -55,6 +55,7 @@ void ClientModell::receiveInfo() {
     db->vVS.set(data.vspeed);
     db->aPA.set(data.alt);
     db->aIA.set(data.alt);
+    db->aHGT.set(data.alt - db->elevation.get());
     db->lat.set(data.lat);
     db->lon.set(data.lon);
     db->aRoll.set(data.roll);

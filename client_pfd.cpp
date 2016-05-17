@@ -39,7 +39,10 @@ void ClientPFD::sendInfo() {
     dmcap.gen.altRadAlt = db->aHGT.get();
     dmcap.gen.altBaroRefMode = 1;
     dmcap.gen.altBaroRef = 1013;
-    
+    dmcap.gen.altLandElev = db->elevation.get();
+    dmcap.gen.altLandElevVis = 1;
+    dmcap.gen.altGroundRef = db->elevation.get();
+    dmcap.gen.altGroundRefVis = 1;
     if (db->aHGT.get() <= 2500) {
         dmcap.gen.altRadAltVis = 1;
     } else {
@@ -51,9 +54,6 @@ void ClientPFD::sendInfo() {
     dmcap.gen.altTargetSelAlt = db->apAlt.get();
     dmcap.gen.headSel = db->apHding.get();
     dmcap.gen.headSelVis = 1;
-    //dmcap.gen.pfdALTFlagVis = db->apALTHoldEngaged.get();
-    //dmcap.gen.pfdSPDFlagVis = db->apSpeedHoldEngaged.get();
-    //dmcap.gen.pfdHDGFlagVis = db->apHDGHoldEngaged.get();
     
     //ILS
     dmcap.gen.glsVis = db->ilsAlive.get();
@@ -90,7 +90,7 @@ void ClientPFD::sendInfo() {
     FMA fma5;
     memset(&fma5, 0, sizeof(FMA));
     sprintf(fma5.text, "ILS");
-    fma5.textVis = 0;
+    fma5.textVis = db->ilsAlive.get();
     
     FMA fma6;
     memset(&fma6, 0, sizeof(FMA));

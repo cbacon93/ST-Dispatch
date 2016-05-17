@@ -27,11 +27,9 @@
 #include "client_pfd.hpp"
 #include "client_xplane.hpp"
 #include "client_anzeigen.hpp"
-<<<<<<< HEAD
 #include "client_modell.hpp"
-=======
 #include "client_hardware.hpp"
->>>>>>> 5e55588cfc514a3ca1c4952d3486005f644896ff
+#include "client_environment.hpp"
 
 
 //Constants
@@ -66,10 +64,12 @@ int main () {
     
     //init clients - ip - sendport - recvport
     //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
-    ClientPFD clientPFD(&db, "255.255.255.255", 23004, 0);
+    ClientPFD clientPFD(&db, "192.168.178.38", 23004, 0);
     // ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
-    ClientAnzeigen clientAnzeigen(&db, "255.255.255.255", 10001, 0);
-    ClientModell clientModell(&db, "255.255.255.255", 10003, 10004);
+    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 10001, 0);
+    ClientModell clientModell(&db, "192.168.178.38", 10003, 10004);
+    ClientEnvironment clientEnvironment(&db, "192.168.178.38", 10005, 10006);
+    ClientHardware clientHardware(&db, "192.168.178.28", 10009, 10010);
     
     //main loop
     do
@@ -86,6 +86,8 @@ int main () {
         clientPFD.sendInfo();
         clientAnzeigen.sendInfo();
         clientModell.sendInfo();
+        clientEnvironment.sendInfo();
+        clientHardware.sendInfo();
         
         //timer stop
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();

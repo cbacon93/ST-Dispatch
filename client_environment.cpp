@@ -28,9 +28,11 @@ void ClientEnvironment::receiveInfo() {
     recvData data;
     unsigned long n = net.receiveData(&data, sizeof(data));
     
-    //corrupt data -> abor
-    if (n != sizeof(data))
+    //corrupt data -> abort
+    if (n != sizeof(data)) {
+        std::cout << "Environment Data Mismatch..." << std::endl;
         return;
+    }
     
     //echo /debug/
     std::cout << "Environment Received " << n << " / " << n << " bytes" << std::endl;

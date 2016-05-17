@@ -26,8 +26,10 @@ void ClientExample::receiveInfo() {
     unsigned long n = net.receiveData(&data, sizeof(data));
     
     //corrupt data -> abort
-    if (n != sizeof(data))
+    if (n != sizeof(data)) {
+        std::cout << "Example Data Mismatch..." << std::endl;
         return;
+    }
     
     //echo /debug/
     std::cout << "Example Received " << n << " / " << n << " bytes" << std::endl;

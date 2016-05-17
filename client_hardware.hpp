@@ -28,14 +28,14 @@ private:
 	struct recvData {
 		float flaps;
 		double trimmung;
-		double heading;
-		long gear;
-		long autopilot;	
-		float vIAS;
+		double heading_set;
+		long gear_set;
+		long autopilot_engaged;
+		float speed_set;
 		float alt_set;
-		long autothrottle;
-		long alt_hold;
-		long hdg_hold;
+		long autothrottle_engaged;
+		long alt_hold_engaged;
+		long hdg_hold_engaged;
 		float aileron;
 		float elevator;
 		float rudder;
@@ -44,11 +44,12 @@ private:
 
 public:
     //inherit constructor of base class
-     Hardware(Database * _db, std::string ip_adress, unsigned int sendPort, unsigned int recvPort):
+     ClientHardware(Database * _db, std::string ip_adress, unsigned int sendPort, unsigned int recvPort):
     Client(_db, ip_adress, sendPort, recvPort) {}
     
     //sending and receiving data
     virtual void sendInfo();
+    virtual void receiveInfo();
 };
 
 #endif /* client_hardware_hpp */

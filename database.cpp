@@ -18,6 +18,7 @@ void Database::initData() {
     this->iThrott.set(0);
     
     this->aTHDG.set(0);
+    this->apEngaged.set(true);
 }
 
 
