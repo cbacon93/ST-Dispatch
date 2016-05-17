@@ -15,23 +15,21 @@ class ClientEnvironment : public Client {
 private:
     //data structures
     struct sendData {
-        double x;
-        double y;
-        double z;
+        double lat;
+        double lon;
+        double talt;
         double phi;
         double theta;
         double psi;
-        
-         int counter;
     };
     
     struct recvData {
-        double u;
-        double v;
-        double w;
-        double Elevation;
-        
-         int counter;
+        double xwind;
+        double ywind;
+        double zwind;
+        double elevation;
+        double winddir;
+        double windspeed;
     };
     
     

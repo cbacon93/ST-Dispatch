@@ -88,7 +88,7 @@ public:
     DBElement<double> iAiln;
     DBElement<double> iElev;
     DBElement<double> iRuddr;
-    DBElement<long>   iFlaps;
+    DBElement<double> iFlaps;
     DBElement<double> iTrim;
     DBElement<double> iThrott;
     DBElement<double> iBreak;
