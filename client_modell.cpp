@@ -51,7 +51,7 @@ void ClientModell::receiveInfo() {
     //save data in database
     db->vKIAS.set(data.airspeed);
     db->vKTAS.set(data.airspeed);
-    db->vMach.set(data.mach);
+    db->vMach.set(data.airspeed/data.soundspeed);
     db->vVS.set(data.vspeed);
     db->aPA.set(data.alt);
     db->aIA.set(data.alt);

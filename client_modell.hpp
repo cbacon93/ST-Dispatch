@@ -38,7 +38,7 @@ private:
     
     struct recvData {
         double airspeed;
-        double mach;
+        double soundspeed;
         double gs;
         double vspeed;
         double alt;
