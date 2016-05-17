@@ -52,6 +52,7 @@ void ClientModell::receiveInfo() {
     db->vKIAS.set(data.airspeed);
     db->vKTAS.set(data.airspeed);
     db->vMach.set(data.airspeed/data.soundspeed);
+    db->vKTGS.set(data.gs);
     db->vVS.set(data.vspeed);
     db->aPA.set(data.alt);
     db->aIA.set(data.alt);

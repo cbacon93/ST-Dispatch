@@ -26,20 +26,19 @@ private:
     };
     
 	struct recvData {
-		float flaps;
+		double flaps;
 		double trimmung;
 		double heading_set;
-		long gear_set;
-		long autopilot_engaged;
-		float speed_set;
-		float alt_set;
-		long autothrottle_engaged;
-		long alt_hold_engaged;
-		long hdg_hold_engaged;
-		float aileron;
-		float elevator;
-		float rudder;
-
+		double gear_set;
+		double autopilot_engaged;
+		double speed_set;
+		double alt_set;
+		double autothrottle_engaged;
+		double alt_hold_engaged;
+		double hdg_hold_engaged;
+		double aileron;
+		double elevator;
+		double rudder;
 	};
 
 public:
