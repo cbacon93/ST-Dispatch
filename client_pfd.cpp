@@ -21,6 +21,7 @@ void ClientPFD::sendInfo() {
     dmcap.gen.indAirSpeed = db->vKIAS.get();
     dmcap.gen.grndSpeed = db->vKTGS.get();
     dmcap.gen.vspeed = db->vVS.get();
+    //dmcap.gen.vspeedDigiVis = 1; //digital vspeed visible
     dmcap.gen.machVis = 1;
     dmcap.gen.mach = db->vMach.get();
     
@@ -33,11 +34,14 @@ void ClientPFD::sendInfo() {
     dmcap.gen.head = db->aTHDG.get();
     dmcap.gen.headActTrack = db->aTCRS.get();
     dmcap.gen.headActTrackVis = 1;
+    dmcap.gen.pitchProtMode = 1;
+    dmcap.gen.rollProtMode = 1;
     
     //height
     dmcap.gen.alt = db->aIA.get();
     dmcap.gen.altRadAlt = db->aHGT.get();
     dmcap.gen.altBaroRefMode = 1;
+    dmcap.gen.altTargetMode = 1;
     dmcap.gen.altBaroRef = 1013;
     dmcap.gen.altLandElev = db->elevation.get();
     dmcap.gen.altLandElevVis = 1;
@@ -52,6 +56,7 @@ void ClientPFD::sendInfo() {
     //autopilot
     dmcap.gen.targetSpeed = db->apSpeed.get();
     dmcap.gen.altTargetSelAlt = db->apAlt.get();
+    dmcap.gen.altTargetSelFl = db->apAlt.get();
     dmcap.gen.headSel = db->apHding.get();
     dmcap.gen.headSelVis = 1;
     
@@ -110,18 +115,26 @@ void ClientPFD::sendInfo() {
     
     //set colors as RGBA
     unsigned char * vspeedCol = (unsigned char*)&(dmcap.gen.vspeedCol);
-    vspeedCol[0] = 0;   //r
+    vspeedCol[0] = 000; //b
     vspeedCol[1] = 255; //g
-    vspeedCol[2] = 0;   //b
+    vspeedCol[2] = 000; //r
     vspeedCol[3] = 255; //a
 
-    unsigned char * altnumCol = (unsigned char*)&(dmcap.gen.altNumCol);
-    altnumCol[0] = 0;
-    altnumCol[1] = 255;
-    altnumCol[2] = 0;
-    altnumCol[3] = 255;
+    unsigned char * altwinCol = (unsigned char*)&(dmcap.gen.altWinCol);
+    altwinCol[0] = 000; //b
+    altwinCol[1] = 255; //g
+    altwinCol[2] = 255; //r
+    altwinCol[3] = 255; //a
     
-    dmcap.gen.altTargetCol =dmcap.gen.altNumCol;
+    unsigned char * altselCol = (unsigned char*)&(dmcap.gen.altTargetCol);
+    altselCol[0] = 255; //b
+    altselCol[1] = 175; //g
+    altselCol[2] = 000; //r
+    altselCol[3] = 255; //a
+    
+    dmcap.gen.altNumCol = dmcap.gen.vspeedCol;
+    
+    
     
     //build send buffer and send data
     dmcap.updateSndBuf();
