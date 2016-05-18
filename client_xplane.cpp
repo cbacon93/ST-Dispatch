@@ -88,6 +88,7 @@ void ClientXplane::receiveInfo() {
                 db->aPA.set(data20.altmsl*0.3048);
                 db->lat.set(data20.lat);
                 db->lon.set(data20.lon);
+                db->elevation.set(db->aPA.get() - db->aHGT.get());
                 break;
             case 108:
                 recvData108 data108;

@@ -44,13 +44,16 @@ void ClientPFD::sendInfo() {
     dmcap.gen.altTargetMode = 1;
     dmcap.gen.altBaroRef = 1013;
     dmcap.gen.altLandElev = db->elevation.get();
-    dmcap.gen.altLandElevVis = 1;
     dmcap.gen.altGroundRef = db->elevation.get();
-    dmcap.gen.altGroundRefVis = 1;
-    if (db->aHGT.get() <= 2500) {
+    
+    if (db->aHGT.get() <= 2500*0.3048) {
         dmcap.gen.altRadAltVis = 1;
+        dmcap.gen.altLandElevVis = 1;
+        dmcap.gen.altGroundRefVis = 1;
     } else {
         dmcap.gen.altRadAltVis = 0;
+        dmcap.gen.altLandElevVis = 0;
+        dmcap.gen.altGroundRefVis = 0;
     }
     
     //autopilot

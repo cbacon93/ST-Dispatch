@@ -65,7 +65,7 @@ int main () {
     //init clients - ip - sendport - recvport
     //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
     ClientPFD clientPFD(&db, "192.168.178.38", 23004, 0);
-    // ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
+    ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
     ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 10001, 0);
     ClientModell clientModell(&db, "192.168.178.38", 10003, 10004);
     ClientEnvironment clientEnvironment(&db, "192.168.178.38", 10005, 10006);
