@@ -38,6 +38,8 @@ private:
 		double hdg_hold_engaged;
 		double aileron;
 		double elevator;
+        double thrust_l;
+        double thrust_r;
 		double rudder;
 	};
 

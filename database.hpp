@@ -90,9 +90,10 @@ public:
     DBElement<double> iRuddr;
     DBElement<double> iFlaps;
     DBElement<double> iTrim;
-    DBElement<double> iThrott;
-    DBElement<double> iBreak;
-    DBElement<double> iSpeedBreak;
+    DBElement<double> iThrott_l;
+    DBElement<double> iThrott_r;
+    DBElement<double> iBrake;
+    DBElement<double> iSpeedBrake;
     
     //gear
     DBElement<bool> gear_lever;

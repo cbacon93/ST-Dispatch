@@ -51,4 +51,6 @@ void ClientHardware::receiveInfo() {
 	db->iAiln.set(data.aileron);
 	db->iElev.set(data.elevator);
 	db->iRuddr.set(data.rudder);
+    db->iThrott_l.set(data.thrust_l);
+    db->iThrott_r.set(data.thrust_r);
 }

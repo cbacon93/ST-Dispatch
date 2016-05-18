@@ -12,14 +12,14 @@
 void ClientModell::sendInfo() {
     sendData data;
    
-    data.throt_c = db->iThrott.get();
+    data.throt_c = db->iThrott_l.get();
     data.ze_c = db->iRuddr.get();
     data.et_c = db->iElev.get();
     data.xi_c = db->iAiln.get();
     data.gear_c = db->gear_lever.get();
     data.flaps_c = db->iFlaps.get();
-    data.speedBrake_c = db->iSpeedBreak.get();
-    data.brake_c = db->iBreak.get();
+    data.speedBrake_c = db->iSpeedBrake.get();
+    data.brake_c = db->iBrake.get();
     data.wind_x = db->xWind.get();
     data.wind_y = db->yWind.get();
     data.wind_z = db->zWind.get();

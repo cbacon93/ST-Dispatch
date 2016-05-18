@@ -15,7 +15,8 @@ void Database::initData() {
     this->lon.set(10.331);
     
     this->gear_lever.set(1);
-    this->iThrott.set(0);
+    this->iThrott_l.set(0);
+    this->iThrott_r.set(0);
     
     this->aTHDG.set(0);
     this->apEngaged.set(true);
