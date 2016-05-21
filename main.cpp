@@ -69,7 +69,7 @@ int main () {
     ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 10001, 0);
     ClientModell clientModell(&db, "192.168.178.38", 10003, 10004);
     ClientEnvironment clientEnvironment(&db, "192.168.178.38", 10005, 10006);
-    ClientHardware clientHardware(&db, "192.168.178.28", 10009, 10010);
+    ClientHardware clientHardware(&db, "192.168.178.38", 10009, 10010);
     
     //main loop
     do

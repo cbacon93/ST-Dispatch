@@ -137,5 +137,4 @@ void ClientXplane::receiveInfo() {
                 db->apVvi.set(data118.vvi/196.85);
         }
     } while(dn < n); //no bytes left
-    db->debugOutput();
 }

@@ -24,6 +24,8 @@ void Database::initData() {
     this->aMHDG.set(4.62135 - 0.05);
     this->elevation.set(90);
     this->aPA.set(92);
+    this->aIA.set(92);
+    this->aHGT.set(2);
 }
 
 
@@ -41,4 +43,8 @@ void Database::debugOutput() {
     std::cout << "aTHDG: " << aTHDG.get() << std::endl;
     std::cout << "gear_up: " << gear_up.get() << std::endl;
     std::cout << "gear_down: " << gear_down.get() << std::endl;
+    std::cout << "gear_lever: " << gear_lever.get() << std::endl;
+    std::cout << "apEngaged: " << apEngaged.get() << std::endl;
+    std::cout << "apAT: " << apSpeedHoldEngaged.get() << std::endl;
+    std::cout << "thrust_r: " << iThrott_r.get() << std::endl;
 }

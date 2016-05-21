@@ -40,11 +40,11 @@ void ClientHardware::receiveInfo() {
 	//put data in database
 	db->iFlaps.set(data.flaps); //int
 	db->iTrim.set(data.trimmung);
-	db->apHding.set(data.heading_set); //float
+	db->apHding.set(data.heading_set/180*3.14159265); //float
     db->gear_lever.set(data.gear_set);
 	db->apEngaged.set(data.autopilot_engaged); //boolean
     db->apSpeed.set(data.speed_set);
-    db->apAlt.set(data.alt_set);
+    db->apAlt.set(data.alt_set*0.3048);
     db->apSpeedHoldEngaged.set(data.autothrottle_engaged);
 	db->apALTHoldEngaged.set(data.alt_hold_engaged); //boolean
 	db->apHDGHoldEngaged.set(data.hdg_hold_engaged); //boolean
@@ -53,4 +53,6 @@ void ClientHardware::receiveInfo() {
 	db->iRuddr.set(data.rudder);
     db->iThrott_l.set(data.thrust_l);
     db->iThrott_r.set(data.thrust_r);
+    
+    db->debugOutput();
 }
