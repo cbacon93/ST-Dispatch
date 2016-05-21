@@ -11,15 +11,19 @@
 
 //to be implemented if necessary
 void Database::initData() {
-    this->lat.set(52.191);
-    this->lon.set(10.331);
+    
+    //start data
+    this->lat.set(52.319800); // 52.3203N
+    this->lon.set(10.567241); // 10.5754E
     
     this->gear_lever.set(1);
     this->iThrott_l.set(0);
     this->iThrott_r.set(0);
     
-    this->aTHDG.set(0);
-    this->apEngaged.set(false);
+    this->aTHDG.set(4.62135);
+    this->aMHDG.set(4.62135 - 0.05);
+    this->elevation.set(90);
+    this->aPA.set(92);
 }
 
 
@@ -28,6 +32,8 @@ void Database::debugOutput() {
     std::cout << "vMach: " << vMach.get() << std::endl;
     std::cout << "vVS: " << vVS.get() << std::endl;
     std::cout << "aPA: " << aPA.get() << std::endl;
+    std::cout << "aIA: " << aIA.get() << std::endl;
+    std::cout << "ELEV: " << elevation.get() << std::endl;
     std::cout << "lat: " << lat.get() << std::endl;
     std::cout << "lon: " << lon.get() << std::endl;
     std::cout << "aRoll: " << aRoll.get() << std::endl;
