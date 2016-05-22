@@ -22,7 +22,7 @@ private:
         double autothrottle;
         double alt_hold;
         double hdg_hold;
-        
+        double sim_reset;
     };
     
 	struct recvData {

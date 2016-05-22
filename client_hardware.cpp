@@ -19,7 +19,7 @@ void ClientHardware::sendInfo() {
     data.autothrottle = db->apSpeedHoldEngaged.get(); //boolean
     data.alt_hold = db->apALTHoldEngaged.get(); //boolean
     data.hdg_hold = db->apHDGHoldEngaged.get(); //boolean
-  
+    data.sim_reset = db->sim_resetted.get();
     
     net.sendData(&data, sizeof(data));
 }
