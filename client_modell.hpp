@@ -48,6 +48,7 @@ private:
     
     struct recvData {
         double airspeed;
+        double trueairspeed;
         double mach;
         double gs;
         double vspeed;

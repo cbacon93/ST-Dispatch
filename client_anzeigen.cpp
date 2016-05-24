@@ -16,6 +16,7 @@ void ClientAnzeigen::sendInfo() {
     data.latitude = db->lat.get();
     data.longitude = db->lon.get();
     data.heading = db->aTHDG.get();
+    data.heading_sel = db->apHding.get();
     data.course = db->aTCRS.get();
     data.groundspeed = db->vKTGS.get();
     data.trueairspeed = db->vKTAS.get();

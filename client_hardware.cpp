@@ -39,11 +39,11 @@ void ClientHardware::receiveInfo() {
 	//put data in database
 	db->iFlaps.set(data.flaps); //int
 	db->iTrim.set(data.trimmung);
-	db->apHding.set(data.heading_set/180*3.14159265); //float
+	db->apHding.set(data.heading_set); //float radiant
     db->gear_lever.set(data.gear_set);
 	db->apEngagedButton.set(data.autopilot_engaged); //boolean
     db->apSpeed.set(data.speed_set);
-    db->apAlt.set(data.alt_set*0.3048);
+    db->apAlt.set(data.alt_set); //meter
     db->apSpeedHoldEngagedButton.set(data.autothrottle_engaged);
 	db->apALTHoldEngagedButton.set(data.alt_hold_engaged); //boolean
 	db->apHDGHoldEngagedButton.set(data.hdg_hold_engaged); //boolean

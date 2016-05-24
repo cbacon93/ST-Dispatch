@@ -64,12 +64,23 @@ int main () {
     
     //init clients - ip - sendport - recvport
     //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
-    ClientPFD clientPFD(&db, "192.168.178.38", 23004, 0);
-    ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
-    ClientAnzeigen clientAnzeigen(&db, "127.0.0.1", 10001, 0);
-    ClientModell clientModell(&db, "192.168.178.38", 10003, 10004);
-    ClientEnvironment clientEnvironment(&db, "192.168.178.38", 10005, 10006);
-    ClientHardware clientHardware(&db, "192.168.178.38", 10009, 10010);
+    //ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
+    
+    /*
+    ClientPFD           clientPFD           (&db, "192.168.0.3", 23004, 0);
+    ClientAnzeigen      clientAnzeigen      (&db, "192.168.0.3", 10001, 0);
+    ClientModell        clientModell        (&db, "192.168.0.7", 10003, 10004);
+    ClientEnvironment   clientEnvironment   (&db, "192.168.0.7", 10005, 10006);
+    ClientHardware      clientHardware      (&db, "192.168.0.7", 10009, 10010);
+    //*/
+    
+    
+    ClientPFD           clientPFD           (&db, "127.0.0.1", 23004, 0);
+    ClientAnzeigen      clientAnzeigen      (&db, "127.0.0.1", 10001, 0);
+    ClientModell        clientModell        (&db, "127.0.0.1", 10003, 10004);
+    ClientEnvironment   clientEnvironment   (&db, "127.0.0.1", 10005, 10006);
+    ClientHardware      clientHardware      (&db, "127.0.0.1", 10009, 10010);
+    //*/
     
     //main loop
     do

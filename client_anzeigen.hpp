@@ -19,6 +19,7 @@ private:
         double latitude;
         double longitude;
         double heading;
+        double heading_sel;
         double course;
         double groundspeed;
         double trueairspeed;

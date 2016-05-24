@@ -14,6 +14,8 @@ void Database::initData() {
     this->gear_pos.set(1);
     this->gear_lever.set(1);
     
+    this->apHding.set(0.3);
+    
     //start data
     this->lat.set(52.319800); // 52.3203N
     this->lon.set(10.567241); // 10.5754E

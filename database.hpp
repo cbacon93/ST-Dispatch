@@ -67,62 +67,62 @@ public:
     DBElement<bool> sim_running;
     DBElement<bool> sim_resetted;
 
-    //speed
+    //speed in knots
     DBElement<double> vKIAS;
     DBElement<double> vKTAS;
     DBElement<double> vKTGS;
     DBElement<double> vMach;
-    DBElement<double> vVS;
+    DBElement<double> vVS; //m/s
     
     //wind
-    DBElement<double> vWind;
-    DBElement<double> dirWind;
-    DBElement<double> xWind; //u
-    DBElement<double> yWind; //v
-    DBElement<double> zWind; //w
+    DBElement<double> vWind; //knots
+    DBElement<double> dirWind; //rad
+    DBElement<double> xWind; // m/s
+    DBElement<double> yWind; //
+    DBElement<double> zWind; //
     DBElement<double> xRotWind;
     DBElement<double> yRotWind;
     DBElement<double> zRotWind;
     
     //input
-    DBElement<double> iAiln;
+    DBElement<double> iAiln; // -1 .. 1
     DBElement<double> iElev;
     DBElement<double> iRuddr;
-    DBElement<double> iFlaps;
-    DBElement<double> iTrim;
-    DBElement<double> iThrott_l;
-    DBElement<double> iThrott_r;
-    DBElement<double> iBrake;
-    DBElement<double> iSpeedBrake;
+    DBElement<double> iFlaps; // 0, 1, 2, 3, 4
+    DBElement<double> iTrim; // -1 .. 1
+    DBElement<double> iThrott_l; // -0.6 .. 1
+    DBElement<double> iThrott_r; //
+    DBElement<double> iBrake; // 0
+    DBElement<double> iSpeedBrake; // 0
     
     //gear
     DBElement<bool> gear_lever;
-    DBElement<double> gear_pos;
+    DBElement<double> gear_pos; // 0 .. 1
     
     //attitude
-    DBElement<double> aPitch;
-    DBElement<double> aRoll;
-    DBElement<double> aTHDG;
-    DBElement<double> aTCRS;
-    DBElement<double> aMHDG;
-    DBElement<double> lat;
-    DBElement<double> lon;
-    DBElement<double> elevation;
+    DBElement<double> aPitch; //rad
+    DBElement<double> aRoll; //rad
+    DBElement<double> aTHDG; //rad
+    DBElement<double> aTCRS; //rad
+    DBElement<double> aMHDG; //rad
+    DBElement<double> lat; //deg
+    DBElement<double> lon; //deg
+    DBElement<double> elevation; //m
     
     //altitudes
-    DBElement<double> aHGT;
-    DBElement<double> aPA;
-    DBElement<double> aIA;
+    DBElement<double> aHGT; //m
+    DBElement<double> aPA; //m
+    DBElement<double> aIA; //m
     
     //autopilot
     DBElement<bool> apEngaged;
     DBElement<bool> apHDGHoldEngaged;
     DBElement<bool> apALTHoldEngaged;
     DBElement<bool> apSpeedHoldEngaged;
-    DBElement<double> apSpeed;
-    DBElement<double> apHding;
-    DBElement<double> apVvi;
-    DBElement<double> apAlt;
+    DBElement<double> apSpeed; //kts
+    DBElement<double> apHding; //rad
+    DBElement<double> apVvi; //m/s
+    DBElement<double> apAlt; //m
     
     //autopilot button
     DBElement<bool> apEngagedButton;
@@ -132,8 +132,8 @@ public:
     
     //ILS
     DBElement<bool> ilsAlive;
-    DBElement<double> ilsGs;
-    DBElement<double> ilsLoc;
+    DBElement<double> ilsGs; //rad
+    DBElement<double> ilsLoc; //rad
 };
 
 
