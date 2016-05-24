@@ -16,8 +16,7 @@ class ClientHardware : public Client {
 private:
     //data structures
     struct sendData {
-        double gear_up;
-        double gear_down;
+        double gear_pos;
         double autopilot;
         double autothrottle;
         double alt_hold;

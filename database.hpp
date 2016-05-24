@@ -97,8 +97,7 @@ public:
     
     //gear
     DBElement<bool> gear_lever;
-    DBElement<bool> gear_down;
-    DBElement<bool> gear_up;
+    DBElement<double> gear_pos;
     
     //attitude
     DBElement<double> aPitch;
@@ -124,6 +123,12 @@ public:
     DBElement<double> apHding;
     DBElement<double> apVvi;
     DBElement<double> apAlt;
+    
+    //autopilot button
+    DBElement<bool> apEngagedButton;
+    DBElement<bool> apHDGHoldEngagedButton;
+    DBElement<bool> apALTHoldEngagedButton;
+    DBElement<bool> apSpeedHoldEngagedButton;
     
     //ILS
     DBElement<bool> ilsAlive;

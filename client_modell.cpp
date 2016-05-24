@@ -12,7 +12,8 @@
 void ClientModell::sendInfo() {
     sendData data;
    
-    data.throt_c = db->iThrott_l.get();
+    data.throt_r_c = db->iThrott_r.get();
+    data.throt_l_c = db->iThrott_l.get();
     data.ze_c = db->iRuddr.get();
     data.et_c = db->iElev.get();
     data.xi_c = db->iAiln.get();
@@ -27,6 +28,14 @@ void ClientModell::sendInfo() {
     data.wind_rot_y = db->yRotWind.get();
     data.wind_rot_z = db->zRotWind.get();
     data.elevation = db->elevation.get();
+    
+    data.ap_speed_set = db->apSpeed.get();
+    data.ap_alt_set = db->apAlt.get();
+    data.ap_hdg_set = db->apHding.get();
+    data.ap_button = db->apEngagedButton.get();
+    data.ap_speed_button = db->apSpeedHoldEngagedButton.get();
+    data.ap_hdg_button = db->apHDGHoldEngagedButton.get();
+    data.ap_alt_button = db->apALTHoldEngagedButton.get();
     
     data.run = db->sim_running.get();
     data.reset = db->sim_resetted.get();
@@ -51,7 +60,7 @@ void ClientModell::receiveInfo() {
     //save data in database
     db->vKIAS.set(data.airspeed);
     db->vKTAS.set(data.airspeed);
-    db->vMach.set(data.airspeed/data.soundspeed);
+    db->vMach.set(data.mach);
     db->vKTGS.set(data.gs);
     db->vVS.set(data.vspeed);
     db->aPA.set(data.alt);
@@ -62,8 +71,15 @@ void ClientModell::receiveInfo() {
     db->aRoll.set(data.roll);
     db->aPitch.set(data.pitch);
     db->aTHDG.set(data.hdg);
-    db->aMHDG.set(data.hdg-0.05);
+    db->aMHDG.set(data.hdg-0.0175);
     db->aTCRS.set(data.track);
-    db->gear_up.set(data.gear_up);
-    db->gear_down.set(data.gear_dn);
+    db->gear_pos.set(data.gear_pos);
+    
+    db->ilsAlive.set(data.ilsAlive);
+    db->ilsLoc.set(data.ilsloc_dev);
+    db->ilsGs.set(data.ilsgs_dev);
+    db->apEngaged.set(data.apEngaged);
+    db->apSpeedHoldEngaged.set(data.apSpeedEngaged);
+    db->apHDGHoldEngaged.set(data.apHdgEngaged);
+    db->apALTHoldEngaged.set(data.apAltEngaged);
 }

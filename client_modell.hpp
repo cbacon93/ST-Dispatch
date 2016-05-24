@@ -17,7 +17,8 @@ class ClientModell : public Client {
 private:
     //data structures
     struct sendData {
-        double throt_c;
+        double throt_r_c;
+        double throt_l_c;
         double ze_c;
         double et_c;
         double xi_c;
@@ -32,13 +33,22 @@ private:
         double wind_rot_y;
         double wind_rot_z;
         double elevation;
+        
+        double ap_speed_set;
+        double ap_alt_set;
+        double ap_hdg_set;
+        double ap_button;
+        double ap_speed_button;
+        double ap_hdg_button;
+        double ap_alt_button;
+        
         double run;
         double reset;
     };
     
     struct recvData {
         double airspeed;
-        double soundspeed;
+        double mach;
         double gs;
         double vspeed;
         double alt;
@@ -48,8 +58,15 @@ private:
         double pitch;
         double hdg;
         double track;
-        double gear_up;
-        double gear_dn;
+        double gear_pos;
+        
+        double ilsAlive;
+        double ilsloc_dev;
+        double ilsgs_dev;
+        double apEngaged;
+        double apSpeedEngaged;
+        double apHdgEngaged;
+        double apAltEngaged;
     };
     
 public:
