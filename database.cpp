@@ -14,13 +14,14 @@ void Database::initData() {
     this->gear_pos.set(1);
     this->gear_lever.set(1);
     
-    this->apHding.set(0.3);
+    this->apHding.set(4.538);
+    this->apAlt.set(1524);
+    this->apSpeed.set(260);
     
     //start data
     this->lat.set(52.319800); // 52.3203N
     this->lon.set(10.567241); // 10.5754E
     
-    this->gear_lever.set(1);
     this->iThrott_l.set(0);
     this->iThrott_r.set(0);
     

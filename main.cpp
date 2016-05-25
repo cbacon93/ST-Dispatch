@@ -238,6 +238,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         if (px >= WIDTH/2 && !db.sim_resetted.get()) {
             std::cout << "resetting simulation" << std::endl;
             db.sim_resetted.set(true);
+            db.initData();
             
             //add timer after several seconds, deactivate reset flag
             if (db.sim_running.get()) {
