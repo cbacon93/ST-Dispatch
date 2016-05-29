@@ -23,6 +23,7 @@
 #include "networking.hpp"
 #include "database.hpp"
 #include "timer_controller.hpp"
+#include "loader.hpp"
 #include "client_example.hpp"
 #include "client_pfd.hpp"
 #include "client_xplane.hpp"
@@ -55,6 +56,9 @@ GLFWwindow * window;
 
 
 int main () {
+    //load settings
+    Loader loader("/Users/marcel/Documents/Coding/ST-Dispatch/ST-Dispatch/settings.cnf");
+    
     //init window and opengl
     if (initGL()) return -1;
     std::cout << "Window initialized, starting program" << std::endl;
@@ -64,23 +68,13 @@ int main () {
     
     //init clients - ip - sendport - recvport
     //ClientExample testClient(&db, "172.31.2.141", 1111, 1112);
+    
     //ClientXplane clientXplane(&db, "192.168.178.38", 0, 49001);
-    
-    /*
-    ClientPFD           clientPFD           (&db, "192.168.0.3", 23004, 0);
-    ClientAnzeigen      clientAnzeigen      (&db, "192.168.0.3", 10001, 0);
-    ClientModell        clientModell        (&db, "192.168.0.7", 10003, 10004);
-    ClientEnvironment   clientEnvironment   (&db, "192.168.0.7", 10005, 10006);
-    ClientHardware      clientHardware      (&db, "192.168.0.7", 10009, 10010);
-    //*/
-    
-    
-    ClientPFD           clientPFD           (&db, "127.0.0.1", 23004, 0);
-    ClientAnzeigen      clientAnzeigen      (&db, "127.0.0.1", 10001, 0);
-    ClientModell        clientModell        (&db, "127.0.0.1", 10003, 10004);
-    ClientEnvironment   clientEnvironment   (&db, "127.0.0.1", 10005, 10006);
-    ClientHardware      clientHardware      (&db, "127.0.0.1", 10009, 10010);
-    //*/
+    ClientPFD           clientPFD           (&db, loader.get("PFD")->ip, loader.get("PFD")->port_send, loader.get("PFD")->port_receive);
+    ClientAnzeigen      clientAnzeigen      (&db, loader.get("Anzeigen")->ip, loader.get("Anzeigen")->port_send, loader.get("Anzeigen")->port_receive);
+    ClientModell        clientModell        (&db, loader.get("Modell")->ip, loader.get("Modell")->port_send, loader.get("Modell")->port_receive);
+    ClientEnvironment   clientEnvironment   (&db, loader.get("Environment")->ip, loader.get("Environment")->port_send, loader.get("Environment")->port_receive);
+    ClientHardware      clientHardware      (&db, loader.get("Hardware")->ip, loader.get("Hardware")->port_send, loader.get("Hardware")->port_receive);
     
     //main loop
     do

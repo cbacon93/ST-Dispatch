@@ -13,6 +13,7 @@
 void Database::initData() {
     this->gear_pos.set(1);
     this->gear_lever.set(1);
+    this->iFlaps.set(0);
     
     this->apHding.set(4.538);
     this->apAlt.set(1524);

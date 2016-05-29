@@ -33,6 +33,7 @@ void ClientPFD::sendInfo() {
     dmcap.gen.aiCmdSs = db->iAiln.get();
     dmcap.gen.head = db->aTHDG.get();
     dmcap.gen.headActTrack = db->aTCRS.get();
+    dmcap.gen.headTruVis = 1;
     dmcap.gen.headActTrackVis = 1;
     dmcap.gen.pitchProtMode = 1;
     dmcap.gen.rollProtMode = 1;
@@ -55,6 +56,115 @@ void ClientPFD::sendInfo() {
         dmcap.gen.altLandElevVis = 0;
         dmcap.gen.altGroundRefVis = 0;
     }
+    
+    
+    //SPEED CONFIG
+    //flaps max speed
+    switch((int)db->iFlaps.get()) {
+        case(0):
+            dmcap.gen.maxAllowSpeed = 340;
+            dmcap.gen.maxAllowSpeedVis = 1;
+            
+            dmcap.gen.alphaMaxSpeed = 220;
+            dmcap.gen.alphaMaxSpeedVis = 1;
+            dmcap.gen.alphaProtSpeed = 228;
+            dmcap.gen.alphaProtSpeedVis = 1;
+            dmcap.gen.minSelSpeed = 233;
+            dmcap.gen.minSelSpeedVis = 1;
+            
+            dmcap.gen.maxFlapExtNextSpeedVis = 1;
+            dmcap.gen.maxFlapExtNextSpeed = 263;
+            dmcap.gen.minFlapRetractSpeedVis = 0;
+            break;
+        case(1):
+            dmcap.gen.maxAllowSpeed = 263;
+            dmcap.gen.maxAllowSpeedVis = 1;
+            
+            dmcap.gen.alphaMaxSpeed = 183;
+            dmcap.gen.alphaMaxSpeedVis = 1;
+            dmcap.gen.alphaProtSpeed = 190;
+            dmcap.gen.alphaProtSpeedVis = 1;
+            dmcap.gen.minSelSpeed = 195;
+            dmcap.gen.minSelSpeedVis = 1;
+            
+            dmcap.gen.maxFlapExtNextSpeedVis = 1;
+            dmcap.gen.maxFlapExtNextSpeed = 220;
+            dmcap.gen.minFlapRetractSpeedVis = 1;
+            dmcap.gen.minFlapRetractSpeed = 233;
+            break;
+        case(2):
+            dmcap.gen.maxAllowSpeed = 220;
+            dmcap.gen.maxAllowSpeedVis = 1;
+            
+            dmcap.gen.alphaMaxSpeed = 150;
+            dmcap.gen.alphaMaxSpeedVis = 1;
+            dmcap.gen.alphaProtSpeed = 157;
+            dmcap.gen.alphaProtSpeedVis = 1;
+            dmcap.gen.minSelSpeed = 162;
+            dmcap.gen.minSelSpeedVis = 1;
+            
+            dmcap.gen.maxFlapExtNextSpeedVis = 1;
+            dmcap.gen.maxFlapExtNextSpeed = 196;
+            dmcap.gen.minFlapRetractSpeedVis = 1;
+            dmcap.gen.minFlapRetractSpeed = 195;
+            break;
+        case(3):
+            dmcap.gen.maxAllowSpeed = 196;
+            dmcap.gen.maxAllowSpeedVis = 1;
+            
+            dmcap.gen.alphaMaxSpeed = 124;
+            dmcap.gen.alphaMaxSpeedVis = 1;
+            dmcap.gen.alphaProtSpeed = 131;
+            dmcap.gen.alphaProtSpeedVis = 1;
+            dmcap.gen.minSelSpeed = 136;
+            dmcap.gen.minSelSpeedVis = 1;
+            
+            dmcap.gen.maxFlapExtNextSpeedVis = 1;
+            dmcap.gen.maxFlapExtNextSpeed = 182;
+            dmcap.gen.minFlapRetractSpeedVis = 1;
+            dmcap.gen.minFlapRetractSpeed = 162;
+            break;
+        case(4):
+            dmcap.gen.maxAllowSpeed = 182;
+            dmcap.gen.maxAllowSpeedVis = 1;
+            
+            dmcap.gen.alphaMaxSpeed = 110;
+            dmcap.gen.alphaMaxSpeedVis = 1;
+            dmcap.gen.alphaProtSpeed = 117;
+            dmcap.gen.alphaProtSpeedVis = 1;
+            dmcap.gen.minSelSpeed = 125;
+            dmcap.gen.minSelSpeedVis = 1;
+            
+            dmcap.gen.maxFlapExtNextSpeedVis = 0;
+            dmcap.gen.minFlapRetractSpeedVis = 1;
+            dmcap.gen.minFlapRetractSpeed = 136;
+            break;
+    }
+    
+    //max gear speed
+    if (db->gear_pos.get() > 0 && dmcap.gen.maxAllowSpeed > 250) {
+        dmcap.gen.maxAllowSpeed = 250;
+        dmcap.gen.maxAllowSpeedVis = 1;
+    }
+    
+    
+    //low speed v1 and rotating speed
+    if (db->vKIAS.get() < 170 && db->aHGT.get() <= 5) {
+        dmcap.gen.rotSpeed = 160;
+        dmcap.gen.rotSpeedVis = 1;
+        dmcap.gen.decisionSpeed = 120;
+        dmcap.gen.decisionSpeedVis = 1;
+        
+        dmcap.gen.alphaMaxSpeedVis = 0;
+        dmcap.gen.alphaProtSpeedVis = 0;
+        dmcap.gen.minSelSpeedVis = 0;
+        dmcap.gen.maxFlapExtNextSpeedVis = 0;
+        dmcap.gen.minFlapRetractSpeedVis = 0;
+    } else {
+        dmcap.gen.rotSpeedVis = 0;
+        dmcap.gen.decisionSpeedVis = 0;
+    }
+    //SPEED CONFIG END
     
     //autopilot
     dmcap.gen.targetSpeed = db->apSpeed.get();
