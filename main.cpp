@@ -57,7 +57,7 @@ GLFWwindow * window;
 
 int main () {
     //load settings
-    Loader loader("/Users/marcel/Documents/Coding/ST-Dispatch/ST-Dispatch/settings.cnf");
+    Loader loader("settings.cnf");
     
     //init window and opengl
     if (initGL()) return -1;
